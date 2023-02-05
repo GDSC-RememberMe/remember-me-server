@@ -1,0 +1,28 @@
+spring:
+  server:
+    address: localhost
+    port: 8080
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/rmdb?serverTimezone=Asia/Seoul
+    username: root
+    password:
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create-drop
+      show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+#    defer-datasource-initialization: true # data.sql DB 쿼리 실행
+  sql:
+    init:
+      mode: always
+
+jwt:
+  header: Authorization
+  secret-key: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  access-token-validity-in-ms: 1800 # 30분
+  refresh-token-validity-in-ms: 604800 # 7일
