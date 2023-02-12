@@ -23,13 +23,15 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(length = 15, unique = true) // 고유키
-    private String phone;
-
     @Column(length = 50)
-    private String username; // 사용자 이름 - 중복 가능!
+    private String username; // 사용자 아이디
 
     private String password;
+
+    private String nickname; // 사용자 설정 닉네임
+
+    @Column(length = 15, unique = true)
+    private String phone;
 
     @Enumerated(EnumType.STRING)
     private Role role;

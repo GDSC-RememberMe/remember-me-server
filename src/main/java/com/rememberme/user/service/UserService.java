@@ -35,6 +35,7 @@ public class UserService {
     public UserResponseDto join(JoinRequestDto joinRequestDto){
         String phone = joinRequestDto.getPhone();
         String username = joinRequestDto.getUsername();
+        String nickname = joinRequestDto.getNickname();
         String password = joinRequestDto.getPassword();
         String role = joinRequestDto.getRole();
         String profileImg = joinRequestDto.getProfileImg();
@@ -46,9 +47,10 @@ public class UserService {
         validateDuplicateUser(phone);
 
         User user = User.builder()
-                .phone(phone)
                 .username(username)
                 .password(passwordEncoder.encode(password))
+                .nickname(nickname)
+                .phone(phone)
                 .role(Role.valueOf(role))
                 .profileImg(profileImg)
                 .birth(birth)
@@ -65,13 +67,13 @@ public class UserService {
     @Transactional()
     public TokenDto login(LoginRequestDto loginRequestDto) {
 
-        String phone = loginRequestDto.getPhone();
+        String username = loginRequestDto.getUsername();
         String password = loginRequestDto.getPassword();
 
-        UserDetails userDetails = customDetailsService.loadUserByUsername(phone);
+        UserDetails userDetails = customDetailsService.loadUserByUsername(username);
 
         if(!passwordEncoder.matches(password, userDetails.getPassword())){
-            throw new BadCredentialsException(userDetails.getUsername() + "Invalid password");
+            throw new BadCredentialsException(userDetails.getUsername() + "비밀 번호가 잘못 입력되었습니다.");
         }
 
         Authentication authentication =  new UsernamePasswordAuthenticationToken(
@@ -82,18 +84,11 @@ public class UserService {
                 BEARER_HEADER + jwtTokenProvider.issueRefreshToken(authentication));
     }
 
-    private void validateDuplicateUser(String phone){
-        userRepository.findByPhone(phone)
+    private void validateDuplicateUser(String username){
+        userRepository.findByUsername(username)
                 .ifPresent(user -> {
-                    throw new RuntimeException(user.getPhone() + "번호의 사용자가 이미 존재합니다.");
+                    throw new RuntimeException(user.getUsername() + "해당 아이디의 사용자가 이미 존재합니다.");
                 });
-    }
-
-    public UserResponseDto getUserInfoByPhone(String phone) {
-        User user =  userRepository.findByPhone(phone)
-                .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
-
-        return new UserResponseDto(user);
     }
 
     @Transactional
@@ -102,5 +97,12 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
 
         user.saveProfileImg(profileImg);
+    }
+
+    public UserResponseDto getUserInfoByUserId(Long userId) {
+        User user =  userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
+
+        return new UserResponseDto(user);
     }
 }

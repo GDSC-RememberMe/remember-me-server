@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,8 +20,9 @@ public class MemoryQuizController {
     private final MemoryQuizService memoryQuizService;
     private final GcsService GCSService;
 
-    @GetMapping("/memory/all/{userId}")
-    public ResponseEntity<List<MemoryQuizResponseDto>> getMemoryAll(@PathVariable Long userId) {
+    @GetMapping("/memory/all")
+    public ResponseEntity<List<MemoryQuizResponseDto>> getMemoryAll(Authentication authentication) {
+        Long userId = Long.parseLong(authentication.getName());
         List<MemoryQuizResponseDto> result = memoryQuizService.getMemoryAllByUserId(userId);
         return ResponseEntity.ok(result);
     }
@@ -31,10 +33,11 @@ public class MemoryQuizController {
         return ResponseEntity.ok(memoryQuizResponseDto);
     }
 
-    @PostMapping("/memory/{userId}")
+    @PostMapping("/memory")
     public ResponseEntity saveMemory(
-            @PathVariable Long userId,
+            Authentication authentication,
             @RequestBody MemoryQuizRequestDto memoryQuizRequestDto ) {
+        Long userId = Long.parseLong(authentication.getName());
         memoryQuizService.saveMemory(userId, memoryQuizRequestDto);
         return new ResponseEntity(HttpStatus.OK);
     }

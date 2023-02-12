@@ -12,9 +12,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class UserResponseDto {
 
-    private String phone;
-
     private String username;
+
+    private String nickname;
+
+    private String phone;
 
     private String role;
 
@@ -29,6 +31,7 @@ public class UserResponseDto {
     public UserResponseDto(User user) {
         this.phone = user.getPhone();
         this.username = user.getUsername();
+        this.nickname = user.getNickname();
         this.role = user.getRole().toString();
         this.profileImg = user.getProfileImg();
         this.birth = user.getBirth();
