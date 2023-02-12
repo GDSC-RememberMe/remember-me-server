@@ -5,7 +5,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/rmdb?serverTimezone=Asia/Seoul
-    username: root
+    username:
     password:
   jpa:
     database: mysql
@@ -23,6 +23,6 @@ spring:
 
 jwt:
   header: Authorization
-  secret-key: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  secret-key:
   access-token-validity-in-ms: 1800 # 30분
   refresh-token-validity-in-ms: 604800 # 7일
