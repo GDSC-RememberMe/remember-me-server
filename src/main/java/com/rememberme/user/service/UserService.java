@@ -1,6 +1,8 @@
 package com.rememberme.user.service;
 
 import com.rememberme.jwt.JwtTokenProvider;
+import com.rememberme.jwt.entity.RefreshToken;
+import com.rememberme.jwt.repository.RefreshTokenRepository;
 import com.rememberme.user.dto.JoinRequestDto;
 import com.rememberme.user.dto.LoginRequestDto;
 import com.rememberme.user.dto.TokenDto;
@@ -20,16 +22,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 
 @Service
-
 @RequiredArgsConstructor
 public class UserService {
 
     public static final String BEARER_HEADER = "Bearer-";
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomDetailsService customDetailsService;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
     public UserResponseDto join(JoinRequestDto joinRequestDto){
@@ -61,10 +62,16 @@ public class UserService {
 
         userRepository.save(user);
         return new UserResponseDto(user);
-
     }
 
-    @Transactional()
+    private void validateDuplicateUser(String username){
+        userRepository.findByUsername(username)
+                .ifPresent(user -> {
+                    throw new RuntimeException(user.getUsername() + "해당 아이디의 사용자가 이미 존재합니다.");
+                });
+    }
+
+    @Transactional
     public TokenDto login(LoginRequestDto loginRequestDto) {
 
         String username = loginRequestDto.getUsername();
@@ -79,16 +86,48 @@ public class UserService {
         Authentication authentication =  new UsernamePasswordAuthenticationToken(
                 userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
 
-        return new TokenDto(
-                BEARER_HEADER + jwtTokenProvider.createAccessToken(authentication),
-                BEARER_HEADER + jwtTokenProvider.issueRefreshToken(authentication));
+        // 새로 발급한 RefreshToken을 RefreshTokenRepository에 저장하기
+        TokenDto tokenDto = jwtTokenProvider.createTokenDto(authentication);
+        RefreshToken refreshToken = RefreshToken.builder()
+                .userId(authentication.getName())
+                .refreshToken(tokenDto.getRefreshToken())
+                .build();
+        refreshTokenRepository.save(refreshToken);
+        return tokenDto;
     }
 
-    private void validateDuplicateUser(String username){
-        userRepository.findByUsername(username)
-                .ifPresent(user -> {
-                    throw new RuntimeException(user.getUsername() + "해당 아이디의 사용자가 이미 존재합니다.");
-                });
+    // AccessToken 만료 -> 사용자의 RefreshToken 검증 후 재발급하기
+    @Transactional
+    public TokenDto reissue(TokenDto tokenRequestDto) {
+        String accessToken = tokenRequestDto.getAccessToken();
+        String resolveAccessToken = resolveToken(accessToken);
+
+        Authentication authentication = jwtTokenProvider.getAuthentication(resolveAccessToken);
+
+        String userId = authentication.getName();
+        Long parseLongUserId = Long.parseLong(userId);
+        User user = userRepository.findById(parseLongUserId)
+                .orElseThrow(() -> new RuntimeException("해당 사용자 정보가 잘못된 토큰입니다."));
+        RefreshToken refreshToken  = refreshTokenRepository.findByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("사용자의 refreshToken이 존재하지 않습니다."));
+
+        // 사용자의 리프레시 토큰이랑 디비의 리프레시 토큰이랑 다를 경우
+        if (!refreshToken.getRefreshToken().equals(tokenRequestDto.getRefreshToken())) {
+            new RuntimeException("잘못된 refreshToken 입니다.");
+        }
+
+        // 토큰 재발급, refreshToken은 DB에 갱신해주기
+        TokenDto tokenResponseDto = jwtTokenProvider.createTokenDto(authentication);
+        refreshToken.updateToken(tokenResponseDto.getRefreshToken());
+
+        return tokenResponseDto;
+    }
+
+    private String resolveToken(String bearerToken) {
+        if (bearerToken != null && bearerToken.startsWith(BEARER_HEADER)) {
+            return bearerToken.substring(BEARER_HEADER.length());
+        }
+        return null;
     }
 
     @Transactional

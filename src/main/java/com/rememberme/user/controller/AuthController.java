@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserService userService;
-    
+
     @ApiOperation(value = "회원 가입")
     @PostMapping("/join")
     public ResponseEntity<UserResponseDto> join(@RequestBody JoinRequestDto joinRequestDto) {
@@ -30,5 +30,11 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(@RequestBody LoginRequestDto loginRequestDto) {
         return ResponseEntity.ok(userService.login(loginRequestDto));
+    }
+
+    @ApiOperation(value = "토큰 재발급", notes = "AccessToken 만료시, RefreshToken 검증 후 AccessToken와 RefreshToken 재발급")
+    @PostMapping("/reissue")
+    public ResponseEntity<TokenDto> reissueToken(@RequestBody TokenDto tokenDto) {
+        return ResponseEntity.ok(userService.reissue(tokenDto));
     }
 }
