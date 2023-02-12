@@ -48,37 +48,37 @@ public class MemoryQuizController {
     
     @ApiOperation(value = "MemoryQuiz 수정")
     @PatchMapping("/memory/{memoryId}")
-    public ResponseEntity updateMemory(
-            @PathVariable Long memoryId,
+    public ResponseEntity updateMemoryQuiz(
+            @PathVariable Long memoryQuizId,
             @RequestBody MemoryQuizRequestDto memoryQuizRequestDto) {
-        memoryQuizService.updateMemory(memoryId, memoryQuizRequestDto);
+        memoryQuizService.updateMemory(memoryQuizId, memoryQuizRequestDto);
         return new ResponseEntity(HttpStatus.OK);
     }
     
     @ApiOperation(value = "MemoryQuiz 삭제")
     @DeleteMapping("/memory/{memoryId}")
-    public ResponseEntity deleteMemory(@PathVariable Long memoryId) {
-        memoryQuizService.deleteMemory(memoryId);
+    public ResponseEntity deleteMemory(@PathVariable Long memoryQuizId) {
+        memoryQuizService.deleteMemory(memoryQuizId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @ApiOperation(value = "MemoryQuiz 이미지 업로드")
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/image/{memoryId}")
     public String addImageFile (
-            @PathVariable Long memoryId,
+            @PathVariable Long memoryQuizId,
             @RequestParam MultipartFile file){
         String fileUrl = GCSService.uploadFiles(file);
-        memoryQuizService.addImageFile(memoryId, fileUrl);
+        memoryQuizService.addImageFile(memoryQuizId, fileUrl);
         return fileUrl;
     }
     
     @ApiOperation(value = "MemoryQuiz 오디오 업로드")
     @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/audio/{memoryId}")
     public String addAudioFile(
-            @PathVariable Long memoryId,
+            @PathVariable Long memoryQuizId,
             @RequestParam MultipartFile file){
         String fileUrl = GCSService.uploadFiles(file);
-        memoryQuizService.addAudioFile(memoryId, fileUrl);
+        memoryQuizService.addAudioFile(memoryQuizId, fileUrl);
         return fileUrl;
     }
 }

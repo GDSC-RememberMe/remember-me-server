@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class MemoryQuiz {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "memory_quiz_id")
     private Long id;
 
