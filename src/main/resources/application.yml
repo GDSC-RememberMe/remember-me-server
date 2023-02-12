@@ -7,6 +7,9 @@ spring:
     url: jdbc:mysql://localhost:3306/rmdb?serverTimezone=Asia/Seoul
     username:
     password:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher # swagger
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect

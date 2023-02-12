@@ -5,6 +5,7 @@ import com.rememberme.user.dto.LoginRequestDto;
 import com.rememberme.user.dto.TokenDto;
 import com.rememberme.user.dto.UserResponseDto;
 import com.rememberme.user.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final UserService userService;
-
+    
+    @ApiOperation(value = "회원 가입")
     @PostMapping("/join")
     public ResponseEntity<UserResponseDto> join(@RequestBody JoinRequestDto joinRequestDto) {
         return ResponseEntity.ok(userService.join(joinRequestDto));
     }
-
+    
+    @ApiOperation(value = "로그인")
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(@RequestBody LoginRequestDto loginRequestDto) {
         return ResponseEntity.ok(userService.login(loginRequestDto));
