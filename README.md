@@ -9,3 +9,5 @@
 
 ### 주요 커밋
 - [Spring Security + JWT 로그인/회원가입 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/1) (02.05)
+- [MemoryQuiz(사용자 추억) 저장/삭제/조회/수정 기능 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/2/commits/f70aef299ea5263466b00b11949d0bf3ed2dc9c6#diff-ec356e0454efce7af49c5653b013b1058632ba12f02c51600e869a628d6541f1)
+- [GCS 이미지 및 파일 업로드 기능 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/2/commits/f70aef299ea5263466b00b11949d0bf3ed2dc9c6#diff-ec356e0454efce7af49c5653b013b1058632ba12f02c51600e869a628d6541f1) (02.11)
