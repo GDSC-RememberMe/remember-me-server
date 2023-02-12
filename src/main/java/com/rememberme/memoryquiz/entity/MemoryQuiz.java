@@ -65,4 +65,12 @@ public class MemoryQuiz {
             this.tagWhat = memoryQuizRequestDto.getTagWhat();
         }
     }
+
+    public void addImageFile(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public void addAudioFile(String audioUrl) {
+        this.audioUrl = audioUrl;
+    }
 }

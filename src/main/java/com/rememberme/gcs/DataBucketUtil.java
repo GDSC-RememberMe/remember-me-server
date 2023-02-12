@@ -31,10 +31,9 @@ public class DataBucketUtil {
     private String gcpDirectoryName;
 
 
-    public FileDto uploadFile(MultipartFile multipartFile, String fileName, String contentType) {
+    public GcsDto uploadFile(MultipartFile multipartFile, String fileName, String contentType) {
 
         try{
-
             byte[] fileData = FileUtils.readFileToByteArray(convertFile(multipartFile));
 
             InputStream inputStream = new ClassPathResource(gcpConfigFile).getInputStream();
@@ -51,7 +50,9 @@ public class DataBucketUtil {
             String publicFileUrl= "https://storage.cloud.google.com/" + gcpBucketId  + "/" + blob.getName(); //  공개된 파일 주소
 
             if(blob != null){
-                return new FileDto(blob.getName(), publicFileUrl);
+                System.out.println("publicFileUrl" + publicFileUrl);
+
+                return new GcsDto(blob.getName(), publicFileUrl);
             }
 
         }catch (Exception e){

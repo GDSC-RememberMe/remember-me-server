@@ -52,4 +52,8 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<MemoryQuiz> memoryQuiz = new ArrayList<>();
+
+    public void saveProfileImg(String profileImg){
+        this.profileImg = profileImg;
+    }
 }

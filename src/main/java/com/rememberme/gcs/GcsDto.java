@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class FileDto {
+public class GcsDto {
 
     private String fileName;
 

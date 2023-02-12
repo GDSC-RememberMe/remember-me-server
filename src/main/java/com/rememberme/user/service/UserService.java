@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 
 @Service
+
 @RequiredArgsConstructor
 public class UserService {
 
@@ -93,5 +94,13 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
 
         return new UserResponseDto(user);
+    }
+
+    @Transactional
+    public void addProfileImage(Long userId, String profileImg) {
+        User user =  userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
+
+        user.saveProfileImg(profileImg);
     }
 }
