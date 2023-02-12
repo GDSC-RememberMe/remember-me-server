@@ -91,18 +91,19 @@ public class UserService {
                 });
     }
 
-    public UserResponseDto getUserInfoByUsername(String username) {
-        User user =  userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
-
-        return new UserResponseDto(user);
-    }
-
     @Transactional
     public void addProfileImage(Long userId, String profileImg) {
         User user =  userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
 
         user.saveProfileImg(profileImg);
+    }
+
+    public UserResponseDto getUserInfoByUserId(String userId) {
+        Long findUserId = Long.parseLong(userId);
+        User user =  userRepository.findById(findUserId)
+                .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
+
+        return new UserResponseDto(user);
     }
 }

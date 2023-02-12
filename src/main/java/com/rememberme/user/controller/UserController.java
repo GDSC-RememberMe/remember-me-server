@@ -2,11 +2,13 @@ package com.rememberme.user.controller;
 
 import com.rememberme.gcs.GcsService.GcsService;
 import com.rememberme.user.dto.UserResponseDto;
+import com.rememberme.user.service.CustomDetailsService;
 import com.rememberme.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,8 +31,8 @@ public class UserController {
 
     @GetMapping("/info")
     public ResponseEntity<UserResponseDto> getUserInfo(Authentication authentication) {
-        String phone = authentication.getName();
-        UserResponseDto userResponseDto = userService.getUserInfoByUsername(phone);
+        String userId = authentication.getName();
+        UserResponseDto userResponseDto  = userService.getUserInfoByUserId(userId);
         return ResponseEntity.ok(userResponseDto);
     }
 }

@@ -55,7 +55,7 @@ public class JwtTokenProvider implements InitializingBean {
                 .parseClaimsJws(token)
                 .getBody();
 
-        UserDetails userDetails = customDetailsService.loadUserByUsername(claims.getSubject()); // username
+        UserDetails userDetails = customDetailsService.loadUserByUserId(claims.getSubject()); // userId
         return new UsernamePasswordAuthenticationToken(userDetails, token, userDetails.getAuthorities());
     }
 
