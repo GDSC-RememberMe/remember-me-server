@@ -99,9 +99,8 @@ public class UserService {
         user.saveProfileImg(profileImg);
     }
 
-    public UserResponseDto getUserInfoByUserId(String userId) {
-        Long findUserId = Long.parseLong(userId);
-        User user =  userRepository.findById(findUserId)
+    public UserResponseDto getUserInfoByUserId(Long userId) {
+        User user =  userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
 
         return new UserResponseDto(user);

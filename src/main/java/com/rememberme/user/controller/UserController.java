@@ -20,10 +20,11 @@ public class UserController {
     private final UserService userService;
     private final GcsService GCSService;
 
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/profile/{userId}")
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/profile")
     public String addProfileImage(
-            @PathVariable Long userId,
+            Authentication authentication,
             @RequestParam MultipartFile file){
+        Long userId = Long.parseLong(authentication.getName());
         String fileUrl = GCSService.uploadFiles(file);
         userService.addProfileImage(userId, fileUrl);
         return fileUrl;
@@ -31,7 +32,7 @@ public class UserController {
 
     @GetMapping("/info")
     public ResponseEntity<UserResponseDto> getUserInfo(Authentication authentication) {
-        String userId = authentication.getName();
+        Long userId = Long.parseLong(authentication.getName());
         UserResponseDto userResponseDto  = userService.getUserInfoByUserId(userId);
         return ResponseEntity.ok(userResponseDto);
     }
