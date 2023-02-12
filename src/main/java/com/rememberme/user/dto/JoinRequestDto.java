@@ -14,13 +14,15 @@ import java.time.LocalDate;
 public class JoinRequestDto {
 
     @NotNull
-    private String phone;
-
-    @NotNull
     private String username;
 
     @NotNull
     private String password;
+
+    private String nickname;
+
+    @NotNull
+    private String phone;
 
     @NotNull
     private String role;

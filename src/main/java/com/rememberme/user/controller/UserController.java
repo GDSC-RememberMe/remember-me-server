@@ -30,7 +30,7 @@ public class UserController {
     @GetMapping("/info")
     public ResponseEntity<UserResponseDto> getUserInfo(Authentication authentication) {
         String phone = authentication.getName();
-        UserResponseDto userResponseDto = userService.getUserInfoByPhone(phone);
+        UserResponseDto userResponseDto = userService.getUserInfoByUsername(phone);
         return ResponseEntity.ok(userResponseDto);
     }
 }

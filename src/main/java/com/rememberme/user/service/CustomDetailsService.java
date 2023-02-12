@@ -20,9 +20,9 @@ public class CustomDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
-        User user = userRepository.findByPhone(phone)
-                .orElseThrow(() -> new UsernameNotFoundException(phone + "번호의 사용자가 존재하지 않습니다."));
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username + "아이디의 사용자가 존재하지 않습니다."));
 
         return createUserDetails(user);
     }
@@ -33,7 +33,7 @@ public class CustomDetailsService implements UserDetailsService {
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
 
         return new org.springframework.security.core.userdetails.User(
-                user.getPhone(),
+                user.getId().toString(), // 핸드폰 번호
                 user.getPassword(),
                 grantedAuthorities);
     }
