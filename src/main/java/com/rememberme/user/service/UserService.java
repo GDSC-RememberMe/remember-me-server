@@ -1,5 +1,7 @@
 package com.rememberme.user.service;
 
+import com.rememberme.family.FamilyRepository;
+import com.rememberme.family.entity.Family;
 import com.rememberme.jwt.JwtTokenProvider;
 import com.rememberme.jwt.entity.RefreshToken;
 import com.rememberme.jwt.repository.RefreshTokenRepository;
@@ -24,6 +26,7 @@ public class UserService {
 
     public static final String BEARER_HEADER = "Bearer-";
     private final UserRepository userRepository;
+    private final FamilyRepository familyRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final CustomDetailsService customDetailsService;
@@ -57,7 +60,12 @@ public class UserService {
                 .activated(activated)
                 .build();
 
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        // 환자일 경우, Family 객체 추가 생성
+        if (role.equals(Role.PATIENT.toString())) {
+            Family family = createFamilyByPatientUser(savedUser.getId());
+            user.saveFamily(family);
+        }
         return new UserResponseDto(user);
     }
 
@@ -66,6 +74,12 @@ public class UserService {
                 .ifPresent(user -> {
                     throw new RuntimeException(user.getUsername() + "해당 아이디의 사용자가 이미 존재합니다.");
                 });
+    }
+
+    @Transactional
+    private Family createFamilyByPatientUser(Long patientId){
+        Family family = Family.builder().patientId(patientId).build();
+        return familyRepository.save(family);
     }
 
     @Transactional
