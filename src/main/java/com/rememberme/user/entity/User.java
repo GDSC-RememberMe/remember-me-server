@@ -1,14 +1,12 @@
 package com.rememberme.user.entity;
 
-import com.rememberme.memoryquiz.entity.MemoryQuiz;
+import com.rememberme.family.entity.Family;
 import com.rememberme.user.entity.enumType.Role;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -52,10 +50,16 @@ public class User {
     @ColumnDefault("true")
     private boolean activated;
 
-    @OneToMany(mappedBy = "user")
-    private List<MemoryQuiz> memoryQuiz = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "family_id")
+    private Family family;
 
     public void saveProfileImg(String profileImg){
         this.profileImg = profileImg;
+    }
+
+    // 보호자가 환자 관계 설정
+    public void saveFamily(Family family){
+        this.family = family;
     }
 }

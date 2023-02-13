@@ -1,7 +1,7 @@
 package com.rememberme.memoryquiz.entity;
 
+import com.rememberme.family.entity.Family;
 import com.rememberme.memoryquiz.dto.MemoryQuizRequestDto;
-import com.rememberme.user.entity.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -42,8 +42,8 @@ public class MemoryQuiz {
     private String audioUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="user_id")
-    private User user;
+    @JoinColumn(name ="family_id")
+    private Family family;
 
     public void updateMemoryQuiz(MemoryQuizRequestDto memoryQuizRequestDto) {
         if (memoryQuizRequestDto.getTitle() != null) {
