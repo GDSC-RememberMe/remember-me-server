@@ -21,6 +21,7 @@ public class MemoryQuizController {
     private final MemoryQuizService memoryQuizService;
     private final GcsService GCSService;
 
+    // 이것만 환자도 접근 가능!, 나머지는 보호자만 접근 가능
     @ApiOperation(value = "사용자의 모든 MemoryQuiz 조회")
     @GetMapping("/memory/all")
     public ResponseEntity<List<MemoryQuizResponseDto>> getMemoryAll(Authentication authentication) {
@@ -31,8 +32,8 @@ public class MemoryQuizController {
     
     @ApiOperation(value = "사용자의 개별 MemoryQuiz 상세 조회")
     @GetMapping("/memory/detail/{memoryId}")
-    public ResponseEntity<MemoryQuizResponseDto> getMemoryOne(@PathVariable Long memoryId) {
-        MemoryQuizResponseDto memoryQuizResponseDto = memoryQuizService.getMemoryByMemoryId(memoryId);
+    public ResponseEntity<MemoryQuizResponseDto> getMemoryOne(@PathVariable Long memoryQuizId) {
+        MemoryQuizResponseDto memoryQuizResponseDto = memoryQuizService.getMemoryQuizByMemoryQuizId(memoryQuizId);
         return ResponseEntity.ok(memoryQuizResponseDto);
     }
 
@@ -47,7 +48,7 @@ public class MemoryQuizController {
     }
     
     @ApiOperation(value = "MemoryQuiz 수정")
-    @PatchMapping("/memory/{memoryId}")
+    @PatchMapping("/memory/{memoryQuizId}")
     public ResponseEntity updateMemoryQuiz(
             @PathVariable Long memoryQuizId,
             @RequestBody MemoryQuizRequestDto memoryQuizRequestDto) {
@@ -56,14 +57,14 @@ public class MemoryQuizController {
     }
     
     @ApiOperation(value = "MemoryQuiz 삭제")
-    @DeleteMapping("/memory/{memoryId}")
+    @DeleteMapping("/memory/{memoryQuizId}")
     public ResponseEntity deleteMemory(@PathVariable Long memoryQuizId) {
         memoryQuizService.deleteMemory(memoryQuizId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
     @ApiOperation(value = "MemoryQuiz 이미지 업로드")
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/image/{memoryId}")
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/image/{memoryQuizId}")
     public String addImageFile (
             @PathVariable Long memoryQuizId,
             @RequestParam MultipartFile file){
@@ -73,7 +74,7 @@ public class MemoryQuizController {
     }
     
     @ApiOperation(value = "MemoryQuiz 오디오 업로드")
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/audio/{memoryId}")
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/audio/{memoryQuizId}")
     public String addAudioFile(
             @PathVariable Long memoryQuizId,
             @RequestParam MultipartFile file){

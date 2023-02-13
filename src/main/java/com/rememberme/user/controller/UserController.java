@@ -2,14 +2,12 @@ package com.rememberme.user.controller;
 
 import com.rememberme.gcs.GcsService.GcsService;
 import com.rememberme.user.dto.UserResponseDto;
-import com.rememberme.user.service.CustomDetailsService;
 import com.rememberme.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
