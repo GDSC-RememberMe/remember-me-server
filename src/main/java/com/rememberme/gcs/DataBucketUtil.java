@@ -50,7 +50,6 @@ public class DataBucketUtil {
             String publicFileUrl= "https://storage.cloud.google.com/" + gcpBucketId  + "/" + blob.getName(); //  공개된 파일 주소
 
             if(blob != null){
-                System.out.println("publicFileUrl" + publicFileUrl);
 
                 return new GcsDto(blob.getName(), publicFileUrl);
             }

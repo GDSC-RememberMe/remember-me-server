@@ -49,8 +49,6 @@ public class JwtTokenProvider implements InitializingBean {
 
     public Claims getClaims(String token) {
         try {
-
-            System.out.println(token);
             return Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
