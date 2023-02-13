@@ -3,10 +3,7 @@ package com.rememberme.user.service;
 import com.rememberme.jwt.JwtTokenProvider;
 import com.rememberme.jwt.entity.RefreshToken;
 import com.rememberme.jwt.repository.RefreshTokenRepository;
-import com.rememberme.user.dto.JoinRequestDto;
-import com.rememberme.user.dto.LoginRequestDto;
-import com.rememberme.user.dto.TokenDto;
-import com.rememberme.user.dto.UserResponseDto;
+import com.rememberme.user.dto.*;
 import com.rememberme.user.entity.User;
 import com.rememberme.user.entity.enumType.Role;
 import com.rememberme.user.repository.UserRepository;
@@ -143,5 +140,21 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
 
         return new UserResponseDto(user);
+    }
+
+    public void validateUsername(UsernameRequestDto usernameRequestDto) {
+        String username = usernameRequestDto.getUsername();
+        boolean isPresent = userRepository.findByUsername(username).isPresent();
+        if (isPresent) {
+            throw new RuntimeException("해당 아이디가 이미 존재합니다.");
+        }
+    }
+
+    public void validatePhone(PhoneRequestDto phoneRequestDto) {
+        String phone = phoneRequestDto.getPhone();
+        boolean isPresent = userRepository.findByPhone(phone).isPresent();
+        if (isPresent) {
+            throw new RuntimeException("해당 핸드폰 번호로 가입한 회원이 이미 존재합니다.");
+        }
     }
 }
