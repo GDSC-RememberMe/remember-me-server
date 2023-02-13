@@ -10,5 +10,5 @@ public interface MemoryQuizRepository extends JpaRepository<MemoryQuiz, Long> {
 
      Optional<MemoryQuiz> findById(Long memoryId);
 
-     List<MemoryQuiz> findAllByUserId(Long userId);
+     List<MemoryQuiz> findAllByFamilyId(Long familyId);
 }
