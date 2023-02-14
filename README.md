@@ -8,6 +8,9 @@
 
 
 ### 주요 커밋
-- [Spring Security + JWT 로그인/회원가입 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/1) (02.05)
+- Spring Security + JWT 로그인/회원가입 구현
+  - [초기 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/1)
+  - [토큰 재발급 로직 리팩토링](https://github.com/GDSC-RememberMe/remember-me-server/commit/e3e1c146671805f404e455d284b316fd42cbfd45)
 - [MemoryQuiz(사용자 추억) 저장/삭제/조회/수정 기능 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/2/commits/f70aef299ea5263466b00b11949d0bf3ed2dc9c6#diff-ec356e0454efce7af49c5653b013b1058632ba12f02c51600e869a628d6541f1)
-- [GCS 이미지/오디오 업로드 기능 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/2/commits/f70aef299ea5263466b00b11949d0bf3ed2dc9c6#diff-ec356e0454efce7af49c5653b013b1058632ba12f02c51600e869a628d6541f1) (02.11)
+- [GCS 이미지/오디오 업로드 기능 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/2/commits/f70aef299ea5263466b00b11949d0bf3ed2dc9c6#diff-ec356e0454efce7af49c5653b013b1058632ba12f02c51600e869a628d6541f1)
+- [User - Family 가족 관계 설정 기능 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/4)
