@@ -23,9 +23,11 @@ public class Family {
     @Column(name = "patient_id")
     private Long patientId;
 
+    @Builder.Default
     @OneToMany(mappedBy = "family")
     private List<User> user = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "family")
     private List<MemoryQuiz> memoryQuiz = new ArrayList<>();
 }
