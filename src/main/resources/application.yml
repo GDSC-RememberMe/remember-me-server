@@ -12,14 +12,14 @@ spring:
       matching-strategy: ant_path_matcher # swagger
   jpa:
     database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: create-drop
       show-sql: true
     properties:
       hibernate:
         format_sql: true
-#    defer-datasource-initialization: true # data.sql DB 쿼리 실행
+  #    defer-datasource-initialization: true # data.sql DB 쿼리 실행
   sql:
     init:
       mode: always
@@ -29,3 +29,12 @@ jwt:
   secret-key:
   access-token-validity-in-ms: 1800 # 30분
   refresh-token-validity-in-ms: 604800 # 7일
+gcp:
+  config:
+    file: gcp-account-file.json
+  project:
+    id: remember-me-377509
+  bucket:
+    id: remember-me
+  dir:
+    name: chap01
