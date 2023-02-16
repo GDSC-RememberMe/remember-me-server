@@ -64,12 +64,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # 계정
-    - name: Initialize Google Cloud SDK
-      uses: zxyle/publish-gae-action@master
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
-          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          version: '290.0.1'
           service_account_key: ${{ secrets.GCP_SA_KEY }}
           project_id: ${{ secrets.PROJECT_ID }}
+    
     - name: Publish app to Google App Engine
       run: |
         sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
