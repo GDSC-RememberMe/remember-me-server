@@ -80,7 +80,7 @@ jobs:
       run: |
         sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
         sudo docker tag ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7} remember-me
-        sudo docker-compose up
+        sudo docker-compose -f /docker-compose.yml up
         
     # SSH 접속 후, 배포
 #     - name: Deploy to GCE
