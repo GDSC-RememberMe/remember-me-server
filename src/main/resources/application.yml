@@ -24,7 +24,7 @@ spring:
       mode: always
 jwt:
   header: Authorization
-  secret-key: ${JWT_ENCODE_KEY}
+  secret-key: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
   access-token-validity-in-ms: 1800
   refresh-token-validity-in-ms: 604800
 gcp:
