@@ -63,6 +63,9 @@ jobs:
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
+    # checkout
+    - name: Checkout
+      uses: actions/checkout@v2
     # 계정
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v0
       with:
