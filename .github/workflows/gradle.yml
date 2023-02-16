@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # 계정
-    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v0
       with:
           version: '290.0.1'
           service_account_key: ${{ secrets.GCP_SA_KEY }}
