@@ -4,8 +4,10 @@ import com.rememberme.family.entity.Family;
 import com.rememberme.user.entity.enumType.Role;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Table(name = "user")
@@ -21,26 +23,30 @@ public class User {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(length = 20)
+    @NotNull
+    @Column(unique = true)
     private String username; // 사용자 아이디
 
+    @NotNull
     private String password;
 
+    @NotNull
     private String nickname; // 사용자 설정 닉네임
 
-    @Column(length = 15, unique = true)
+    @Column(unique = true)
+    @NotNull @Length(min=9, max= 11)
     private String phone;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @Column(name = "profile_img", nullable = true)
+    @Column(name = "profile_img")
     private String profileImg;
 
-    @Column(nullable = true)
+    @NotNull
     private LocalDate birth;
 
-    @Column(nullable = true)
     private String address;
 
     @Column(name = "push_cnt")

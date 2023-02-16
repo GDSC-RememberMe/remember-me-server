@@ -13,6 +13,5 @@ import javax.validation.constraints.NotBlank;
 public class UsernameRequestDto {
 
     @NotBlank
-    @Length(max = 20)
     private String username;
 }

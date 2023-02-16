@@ -13,6 +13,6 @@ import javax.validation.constraints.Pattern;
 public class PhoneRequestDto {
 
     @NotBlank
-    @Pattern(regexp = "^\\d{2,3}-\\d{3,4}-\\d{4}$", message = "핸드폰 번호가 0x(x)-xxx(x)-xxxx 형식으로 입력되어야 합니다.")
+    @Pattern(regexp = "^\\d{9,11}$", message = "전화번호는 공백없이 9 ~ 11자리 숫자이어야 합니다.")
     private String phone;
 }
