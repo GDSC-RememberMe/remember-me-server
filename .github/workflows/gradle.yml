@@ -69,11 +69,15 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
         credentials_json: '${{ secrets.GCE_SA_KEY }}'
-        
+      
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+
+    - name: 'Use gcloud CLI'
+      run: 'gcloud info'
+      
     - name: Publish app to Google App Engine
       run: |
-        gcloud auth activate-service-account ${{ secrets.GCP_SA_EMAIL }} --key-file=${{ secrets.GCE_SA_KEY }}
-        gcloud config set project ${{ secrets.PROJECT_ID }}
         sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
         sudo docker tag ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7} remember-me
         sudo docker-compose up
