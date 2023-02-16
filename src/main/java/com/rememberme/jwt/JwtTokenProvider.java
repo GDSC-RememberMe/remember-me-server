@@ -25,9 +25,9 @@ public class JwtTokenProvider implements InitializingBean {
     private final long refreshTokenValidity;
     private String key;
 
-    public JwtTokenProvider(@Value("${jwt.secret-key}") String key,
-                            @Value("${jwt.access-token-validity-in-ms}") long accessTokenValidity,
-                            @Value("${jwt.refresh-token-validity-in-ms}") long refreshTokenValidity,
+    public JwtTokenProvider(@Value("${spring.jwt.secret-key}") String key,
+                            @Value("${spring.jwt.access-token-validity-in-ms}") long accessTokenValidity,
+                            @Value("${spring.jwt.refresh-token-validity-in-ms}") long refreshTokenValidity,
                             CustomDetailsService customDetailsService){
         this.key = key;
         this.accessTokenValidity = accessTokenValidity * 1000;
