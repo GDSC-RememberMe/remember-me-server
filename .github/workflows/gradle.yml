@@ -59,13 +59,11 @@ jobs:
         docker tag remember-me ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
 
-  deploy:
-    needs: [ build ]
-    runs-on: ubuntu-latest
-    steps:
-    # checkout
-    - name: Checkout
-      uses: actions/checkout@v2
+#   deploy:
+#     needs: [ build ]
+#     runs-on: ubuntu-latest
+#     steps:
+
     # 계정
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@v0
       with:
