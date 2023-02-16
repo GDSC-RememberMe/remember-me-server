@@ -6,6 +6,7 @@ import com.rememberme.user.service.CustomDetailsService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
+@PropertySource("classpath:application.yml")
 public class JwtTokenProvider implements InitializingBean {
 
     public static final String BEARER_HEADER = "Bearer-";
