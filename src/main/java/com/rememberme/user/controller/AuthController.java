@@ -22,7 +22,7 @@ public class AuthController {
 
     @ApiOperation(value = "회원 가입")
     @PostMapping("/join")
-    public ResponseEntity<UserResponseDto> join(@RequestBody JoinRequestDto joinRequestDto) {
+    public ResponseEntity<TokenDto> join(@RequestBody JoinRequestDto joinRequestDto) {
         return ResponseEntity.ok(userService.join(joinRequestDto));
     }
     

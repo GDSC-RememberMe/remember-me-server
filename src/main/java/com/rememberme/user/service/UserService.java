@@ -33,7 +33,7 @@ public class UserService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
-    public UserResponseDto join(JoinRequestDto joinRequestDto){
+    public TokenDto join(JoinRequestDto joinRequestDto){
         String phone = joinRequestDto.getPhone();
         String username = joinRequestDto.getUsername();
         String nickname = joinRequestDto.getNickname();
@@ -66,7 +66,7 @@ public class UserService {
             Family family = createFamilyByPatientUser(savedUser.getId());
             user.saveFamily(family);
         }
-        return new UserResponseDto(user);
+        return createToken(username, password);
     }
 
     private void validateDuplicateUser(String username){
@@ -87,6 +87,11 @@ public class UserService {
 
         String username = loginRequestDto.getUsername();
         String password = loginRequestDto.getPassword();
+
+        return createToken(username, password);
+    }
+
+    private TokenDto createToken(String username, String password) {
 
         UserDetails userDetails = customDetailsService.loadUserByUsername(username);
 
