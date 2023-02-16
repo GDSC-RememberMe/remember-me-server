@@ -78,13 +78,15 @@ jobs:
     - name: 'Use gcloud CLI'
       run: 'gcloud info'
     # SSH 접속 후, 배포
-    - uses: 'google-github-actions/ssh-compute@v0'
+    - name: Deploy
+      uses: appleboy/ssh-action@master
       with:
-        instance_name: $GCE_INSTANCE
-        zone: $GCE_INSTANCE_ZONE
-        ssh_private_key: '${{ secrets.GCE_PRIVATE_KEY }}'
+        host: ${{ secrets.SERVER_HOST }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.GCE_PRIVATE_KEY }}
+        port: ${{ secrets.SERVER_PORT }}
         envs: GITHUB_SHA
-        command: |
+        script: |
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
             sudo docker tag ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7} remember-me
             sudo docker-compose up
