@@ -83,8 +83,8 @@ jobs:
       with:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USERNAME }}
-        password: ${{ secrets.SERVER_PASSWORD }}
-        key: ${{ secrets.GCE_PRIVATE_KEY }}
+        passphrase: ${{ secrets.GCE_PRIVATE_KEY }}
+        key: ${{ secrets.GCE_SA_KEY }}
         port: ${{ secrets.SERVER_PORT }}
         envs: GITHUB_SHA
         script: |
