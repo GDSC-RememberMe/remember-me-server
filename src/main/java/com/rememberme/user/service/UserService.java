@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -104,11 +105,18 @@ public class UserService {
 
         // 새로 발급한 RefreshToken을 RefreshTokenRepository에 저장하기
         TokenDto tokenDto = jwtTokenProvider.createTokenDto(authentication);
-        RefreshToken refreshToken = RefreshToken.builder()
-                .userId(authentication.getName())
-                .refreshToken(tokenDto.getRefreshToken())
-                .build();
-        refreshTokenRepository.save(refreshToken);
+
+        Optional<RefreshToken> refreshToken  = refreshTokenRepository.findByUserId(authentication.getName());
+        if(refreshToken.isPresent()) {
+            String updateRefreshToken = tokenDto.getRefreshToken();
+            refreshToken.get().updateToken(updateRefreshToken);
+        } else {
+            RefreshToken newToken = RefreshToken.builder()
+                    .userId(authentication.getName())
+                    .token(tokenDto.getRefreshToken())
+                    .build();
+            refreshTokenRepository.save(newToken);
+        }
         return tokenDto;
     }
 
@@ -128,7 +136,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("사용자의 refreshToken이 존재하지 않습니다."));
 
         // 사용자의 리프레시 토큰이랑 디비의 리프레시 토큰이랑 다를 경우
-        if (!refreshToken.getRefreshToken().equals(tokenRequestDto.getRefreshToken())) {
+        if (!refreshToken.getToken().equals(tokenRequestDto.getRefreshToken())) {
             new RuntimeException("잘못된 refreshToken 입니다.");
         }
 

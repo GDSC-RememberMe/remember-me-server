@@ -17,9 +17,9 @@ public class RefreshToken {
 
     private String userId;
 
-    private String refreshToken;
+    private String token;
 
-    public void updateToken(String refreshToken) {
-        this.refreshToken = refreshToken;
+    public void updateToken(String updateToken) {
+        this.token = updateToken;
     }
 }
