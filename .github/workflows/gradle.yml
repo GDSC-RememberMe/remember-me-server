@@ -1,10 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-
 name: Java CI with Gradle
 
 on:
@@ -59,31 +52,17 @@ jobs:
         docker tag remember-me ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
 
-#   deploy:
-#     needs: [ build ]
-#     runs-on: ubuntu-latest
-#     steps:
+  deploy:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
 
-    # Google Cloud 인증
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.GCE_SA_KEY }}'
-      
-    - name: 'Set up Cloud SDK'
-      uses: 'google-github-actions/setup-gcloud@v1'
-      with:
-          project_id: ${{ secrets.PROJECT_ID }}
-          
-    - name: 'Use gcloud CLI'
-      run: 'gcloud info'
     # SSH 접속 후, 배포
     - name: Deploy
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.SERVER_HOST }}
         username: ${{ secrets.SERVER_USERNAME }}
-        # passphrase: ${{ secrets.GCE_PRIVATE_KEY }}
         key: ${{ secrets.GCE_PRIVATE_KEY }}
         port: ${{ secrets.SERVER_PORT }}
         envs: GITHUB_SHA
@@ -91,12 +70,3 @@ jobs:
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
             sudo docker tag ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7} remember-me
             sudo docker-compose up -d
-#     - name: Deploy
-#       run: |
-#         gcloud compute ssh --project=$PROJECT_ID --zone=$GCE_INSTANCE_ZONE $GCE_INSTANCE
-#         pwd
-#         sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7}
-#         sudo docker tag ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${GITHUB_SHA::7} remember-me
-#         sudo docker-compose up
-        
-
