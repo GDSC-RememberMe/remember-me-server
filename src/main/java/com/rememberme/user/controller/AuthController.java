@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.text.ParseException;
 
 @RestController
 @RequestMapping("/auth")
@@ -22,7 +23,7 @@ public class AuthController {
 
     @ApiOperation(value = "회원 가입")
     @PostMapping("/join")
-    public ResponseEntity<TokenDto> join(@RequestBody JoinRequestDto joinRequestDto) {
+    public ResponseEntity<TokenDto> join(@RequestBody JoinRequestDto joinRequestDto) throws ParseException {
         return ResponseEntity.ok(userService.join(joinRequestDto));
     }
     

@@ -1,6 +1,7 @@
 package com.rememberme.user.entity;
 
 import com.rememberme.family.entity.Family;
+import com.rememberme.user.entity.enumType.Gender;
 import com.rememberme.user.entity.enumType.Role;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -47,7 +48,15 @@ public class User {
     @NotNull
     private LocalDate birth;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
     private String address;
+
+    @ColumnDefault("true")
+    @Column(name = "is_push_agree")
+    private boolean isPushAgree;
 
     @Column(name = "push_cnt")
     @ColumnDefault("0")

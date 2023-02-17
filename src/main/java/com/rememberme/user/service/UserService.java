@@ -7,6 +7,7 @@ import com.rememberme.jwt.entity.RefreshToken;
 import com.rememberme.jwt.repository.RefreshTokenRepository;
 import com.rememberme.user.dto.*;
 import com.rememberme.user.entity.User;
+import com.rememberme.user.entity.enumType.Gender;
 import com.rememberme.user.entity.enumType.Role;
 import com.rememberme.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Service
@@ -34,19 +37,19 @@ public class UserService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional
-    public TokenDto join(JoinRequestDto joinRequestDto){
-        String phone = joinRequestDto.getPhone();
+    public TokenDto join(JoinRequestDto joinRequestDto) throws ParseException {
         String username = joinRequestDto.getUsername();
-        String nickname = joinRequestDto.getNickname();
         String password = joinRequestDto.getPassword();
+        String nickname = joinRequestDto.getNickname();
+        String phone = joinRequestDto.getPhone();
         String role = joinRequestDto.getRole();
+        String birth = joinRequestDto.getBirth();
+        String genderStr = joinRequestDto.getGender();
         String profileImg = joinRequestDto.getProfileImg();
-        LocalDate birth = joinRequestDto.getBirth();
         String address = joinRequestDto.getAddress();
+        boolean isPushAgree = joinRequestDto.isPushAgree();
         int pushCnt = joinRequestDto.getPushCnt();
         boolean activated = joinRequestDto.isActivated();
-
-        validateDuplicateUser(phone);
 
         User user = User.builder()
                 .username(username)
@@ -55,8 +58,10 @@ public class UserService {
                 .phone(phone)
                 .role(Role.valueOf(role))
                 .profileImg(profileImg)
-                .birth(birth)
+                .birth(parseLocalDateByBirth(birth))
+                .gender(Gender.valueOf(genderStr))
                 .address(address)
+                .isPushAgree(isPushAgree)
                 .pushCnt(pushCnt)
                 .activated(activated)
                 .build();
@@ -70,11 +75,9 @@ public class UserService {
         return createToken(username, password);
     }
 
-    private void validateDuplicateUser(String username){
-        userRepository.findByUsername(username)
-                .ifPresent(user -> {
-                    throw new RuntimeException(user.getUsername() + "해당 아이디의 사용자가 이미 존재합니다.");
-                });
+    private LocalDate parseLocalDateByBirth (String birth) throws ParseException {
+        LocalDate date = LocalDate.parse(birth, DateTimeFormatter.ISO_DATE);
+        return date;
     }
 
     @Transactional
