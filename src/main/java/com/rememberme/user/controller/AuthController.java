@@ -4,12 +4,8 @@ import com.rememberme.user.dto.*;
 import com.rememberme.user.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.ParseException;
@@ -41,15 +37,13 @@ public class AuthController {
 
     @ApiOperation(value = "아이디 중복 검사")
     @PostMapping("/validation/username")
-    public ResponseEntity validateUsername(@RequestBody @Valid UsernameRequestDto usernameRequestDto) {
+    public void validateUsername(@RequestBody @Valid UsernameRequestDto usernameRequestDto) {
         userService.validateUsername(usernameRequestDto);
-        return new ResponseEntity(HttpStatus.OK);
     }
 
     @ApiOperation(value = "해당 핸드폰 번호로 이미 가입한 회원인지 확인")
     @PostMapping("/validation/phone")
-    public ResponseEntity validatePhone(@RequestBody @Valid PhoneRequestDto phoneRequestDto) {
+    public void validatePhone(@RequestBody @Valid PhoneRequestDto phoneRequestDto) {
         userService.validatePhone(phoneRequestDto);
-        return new ResponseEntity(HttpStatus.OK);
     }
 }

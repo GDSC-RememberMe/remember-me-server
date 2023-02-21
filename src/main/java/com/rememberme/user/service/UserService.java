@@ -176,7 +176,7 @@ public class UserService {
         String username = usernameRequestDto.getUsername();
         boolean isPresent = userRepository.findByUsername(username).isPresent();
         if (isPresent) {
-            throw new RuntimeException("해당 아이디가 이미 존재합니다.");
+            throw new IllegalArgumentException("해당 아이디가 이미 존재합니다.");
         }
     }
 
@@ -184,7 +184,7 @@ public class UserService {
         String phone = phoneRequestDto.getPhone();
         boolean isPresent = userRepository.findByPhone(phone).isPresent();
         if (isPresent) {
-            throw new RuntimeException("해당 핸드폰 번호로 가입한 회원이 이미 존재합니다.");
+            throw new IllegalArgumentException("해당 핸드폰 번호로 가입한 회원이 이미 존재합니다.");
         }
     }
 }
