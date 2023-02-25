@@ -17,5 +17,6 @@
 - **Github Actions + Docker로 CI/CD 환경 구현**- [파일](https://github.com/GDSC-RememberMe/remember-me-server/blob/e69d41e19047e5f7e19d35f135d9619e28d3aab5/.github/workflows/gradle.yml) (02.16)
     - Docker 캐싱으로 속도 개선 - [커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/4fc08812e59e7b2603f5d87309262009c68f3f9b)
     - Gradle 의존성 캐싱하여 속도 개선 - [커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/6c319ccadb8ec0c88f6067bc72a237c6836a3515)
+    - 📝 Github Actions CI/CD 속도 개선하기 - [글 작성](https://sooyoungh.github.io/github-actions-faster)
 - **자체 예외 처리 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/f16b7b09dbfda6b55ac495e677dca84dcf0a36ef) (02.21)
-  - 스프링의 예외 처리 전략, @ExceptionHandler 알아보기 - [글 작성](https://sooyoungh.github.io/exception-1)
+  - 📝 스프링의 예외 처리 전략, @ExceptionHandler 알아보기 - [글 작성](https://sooyoungh.github.io/exception-1)
