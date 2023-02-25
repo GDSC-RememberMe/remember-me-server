@@ -15,5 +15,7 @@
 - [GCS 이미지/오디오 업로드 기능 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/2/commits/f70aef299ea5263466b00b11949d0bf3ed2dc9c6#diff-ec356e0454efce7af49c5653b013b1058632ba12f02c51600e869a628d6541f1) (02.12)
 - [User - Family 가족 관계 설정 기능 구현](https://github.com/GDSC-RememberMe/remember-me-server/pull/4) (02.14)
 - [Github Actions + Docker로 CI/CD 환경 구현](https://github.com/GDSC-RememberMe/remember-me-server/blob/e69d41e19047e5f7e19d35f135d9619e28d3aab5/.github/workflows/gradle.yml) (02.16)
+    - Docker 캐싱으로 속도 개선 - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/4fc08812e59e7b2603f5d87309262009c68f3f9b)
+    - Gradle 의존성 캐싱하여 속도 개선 - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/6c319ccadb8ec0c88f6067bc72a237c6836a3515)
 - [자체 예외 처리 구현](https://github.com/GDSC-RememberMe/remember-me-server/commit/f16b7b09dbfda6b55ac495e677dca84dcf0a36ef) (02.21)
   - 관련 글 작성 : [스프링의 예외 처리 전략, @ExceptionHandler 알아보기](https://sooyoungh.github.io/exception-1)
