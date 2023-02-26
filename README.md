@@ -1,5 +1,12 @@
 # remember-me-server
 
+목차
+- [1. API/DB 설계](#1-apidb-설계)
+- [2. 주요 기능](#2-주요-기능)
+- [3. CI/CD 구조](#3-cicd-구조)
+
+
+### 1. API/DB 설계
 - **프로토타입** : https://whimsical.com/remember-me-UPnSFwbvYbT2GQKpcqKG4T
 - **API 문서** : https://documenter.getpostman.com/view/17088295/2s935hPS8i
 - **DB 문서** : https://dbdiagram.io/d/63d50f69296d97641d7cb363
@@ -7,7 +14,7 @@
 ![rmdb](https://user-images.githubusercontent.com/77563814/218291131-3994fbbc-bc6d-4780-a34d-71a0d797d77a.png)
 
 
-### 주요 기능
+### 2. 주요 기능
 - **Spring Security + JWT 로그인/회원가입 구현** (02.05)
   - 초기 구현 - [PR](https://github.com/GDSC-RememberMe/remember-me-server/pull/1)
   - 토큰 재발급 로직 리팩토링 - [커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/e3e1c146671805f404e455d284b316fd42cbfd45) 
@@ -20,3 +27,11 @@
     - 📝 Github Actions CI/CD 속도 개선하기 - [글 작성](https://sooyoungh.github.io/github-actions-faster)
 - **자체 예외 처리 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/f16b7b09dbfda6b55ac495e677dca84dcf0a36ef) (02.21)
   - 📝 스프링의 예외 처리 전략, @ExceptionHandler 알아보기 - [글 작성](https://sooyoungh.github.io/exception-1)
+
+
+### 3. CI/CD 구조
+
+![image](https://user-images.githubusercontent.com/77563814/221392126-017991a8-ee06-4595-9ebb-90e38ca5e393.png)
+
+
+[⬆위로 가기](#remember-me-server)
