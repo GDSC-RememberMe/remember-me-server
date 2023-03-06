@@ -1,7 +1,7 @@
 package com.rememberme.family.entity;
 
 import com.rememberme.memoryquiz.entity.MemoryQuiz;
-import com.rememberme.user.entity.User;
+import com.rememberme.user.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,7 +25,7 @@ public class Family {
 
     @Builder.Default
     @OneToMany(mappedBy = "family")
-    private List<User> user = new ArrayList<>();
+    private List<Member> member = new ArrayList<>();
 
     @Builder.Default
     @OneToMany(mappedBy = "family")

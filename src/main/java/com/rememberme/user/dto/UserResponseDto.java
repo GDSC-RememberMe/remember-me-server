@@ -1,6 +1,6 @@
 package com.rememberme.user.dto;
 
-import com.rememberme.user.entity.User;
+import com.rememberme.user.entity.Member;
 import com.rememberme.user.entity.enumType.Gender;
 import lombok.*;
 
@@ -33,16 +33,16 @@ public class UserResponseDto {
 
     private int pushCnt;
 
-    public UserResponseDto(User user) {
-        this.phone = user.getPhone();
-        this.username = user.getUsername();
-        this.nickname = user.getNickname();
-        this.role = user.getRole().toString();
-        this.profileImg = user.getProfileImg();
-        this.birth = user.getBirth();
-        this.gender = user.getGender();
-        this.address = user.getAddress();
-        this.isPushAgree = user.isPushAgree();
-        this.pushCnt = user.getPushCnt();
+    public UserResponseDto(Member member) {
+        this.phone = member.getPhone();
+        this.username = member.getUsername();
+        this.nickname = member.getNickname();
+        this.role = member.getRole().toString();
+        this.profileImg = member.getProfileImg();
+        this.birth = member.getBirth();
+        this.gender = member.getGender();
+        this.address = member.getAddress();
+        this.isPushAgree = member.isPushAgree();
+        this.pushCnt = member.getPushCnt();
     }
 }

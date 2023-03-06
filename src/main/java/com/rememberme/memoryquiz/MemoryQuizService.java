@@ -4,7 +4,7 @@ import com.rememberme.family.entity.Family;
 import com.rememberme.memoryquiz.dto.MemoryQuizRequestDto;
 import com.rememberme.memoryquiz.dto.MemoryQuizResponseDto;
 import com.rememberme.memoryquiz.entity.MemoryQuiz;
-import com.rememberme.user.entity.User;
+import com.rememberme.user.entity.Member;
 import com.rememberme.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,9 @@ public class MemoryQuizService {
     private final UserRepository userRepository;
 
     public List<MemoryQuizResponseDto> getMemoryAllByUserId(Long userId) {
-        User user = userRepository.findById(userId)
+        Member member = userRepository.findById(userId)
                 .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
-        Long familyId = user.getFamily().getId();
+        Long familyId = member.getFamily().getId();
 
         List<MemoryQuiz> memoryQuizList = memoryQuizRepository.findAllByFamilyId(familyId);
         return memoryQuizList.stream()
@@ -40,10 +40,10 @@ public class MemoryQuizService {
     }
 
     public void saveMemory(Long userId, MemoryQuizRequestDto memoryQuizRequestDto) {
-        User user = userRepository.findById(userId)
+        Member member = userRepository.findById(userId)
                 .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
 
-        Family family = user.getFamily();
+        Family family = member.getFamily();
         MemoryQuiz memoryQuiz = memoryQuizRequestDto.saveMemoryQuizWithFamily(family);
         memoryQuizRepository.save(memoryQuiz);
     }

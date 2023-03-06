@@ -1,6 +1,6 @@
 package com.rememberme.user.service;
 
-import com.rememberme.user.entity.User;
+import com.rememberme.user.entity.Member;
 import com.rememberme.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,28 +22,28 @@ public class CustomDetailsService implements UserDetailsService {
     // 로그인용 - username 으로 검색
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
+        Member member = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " 아이디의 사용자가 존재하지 않습니다."));
 
-        return createUserDetails(user);
+        return createUserDetails(member);
     }
 
     public UserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
         Long findUserId = Long.parseLong(userId);
-        User user = userRepository.findById(findUserId)
+        Member member = userRepository.findById(findUserId)
                 .orElseThrow(() -> new UsernameNotFoundException(userId + "해당 사용자가 존재하지 않습니다."));
 
-        return createUserDetails(user);
+        return createUserDetails(member);
     }
 
-    private UserDetails createUserDetails(User user) {
+    private UserDetails createUserDetails(Member member) {
 
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(member.getRole().toString()));
 
         return new org.springframework.security.core.userdetails.User(
-                user.getId().toString(), // User 테이블 PK user_id
-                user.getPassword(),
+                member.getId().toString(), // User 테이블 PK user_id
+                member.getPassword(),
                 grantedAuthorities);
     }
 }

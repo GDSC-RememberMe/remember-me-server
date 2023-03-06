@@ -1,6 +1,6 @@
 package com.rememberme.family.dto;
 
-import com.rememberme.user.entity.User;
+import com.rememberme.user.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,12 +22,12 @@ public class FamilyResponseDto {
 
     private String profileImg;
 
-    public FamilyResponseDto of(User user) {
-        this.familyId = user.getFamily().getId();
-        this.userId = user.getId();
-        this.username = user.getUsername();
-        this.nickname = user.getNickname();
-        this.profileImg = user.getProfileImg();
+    public FamilyResponseDto of(Member member) {
+        this.familyId = member.getFamily().getId();
+        this.userId = member.getId();
+        this.username = member.getUsername();
+        this.nickname = member.getNickname();
+        this.profileImg = member.getProfileImg();
         return this;
     }
 }

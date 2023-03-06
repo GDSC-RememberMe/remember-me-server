@@ -6,9 +6,7 @@ import com.rememberme.jwt.JwtTokenProvider;
 import com.rememberme.jwt.entity.RefreshToken;
 import com.rememberme.jwt.repository.RefreshTokenRepository;
 import com.rememberme.user.dto.*;
-import com.rememberme.user.entity.User;
-import com.rememberme.user.entity.enumType.Gender;
-import com.rememberme.user.entity.enumType.Role;
+import com.rememberme.user.entity.Member;
 import com.rememberme.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -137,7 +135,7 @@ public class UserService {
 
         String userId = authentication.getName();
         Long parseLongUserId = Long.parseLong(userId);
-        User user = userRepository.findById(parseLongUserId)
+        Member member = userRepository.findById(parseLongUserId)
                 .orElseThrow(() -> new RuntimeException("해당 사용자 정보가 잘못된 토큰입니다."));
         RefreshToken refreshToken  = refreshTokenRepository.findByUserId(userId)
                 .orElseThrow(() -> new RuntimeException("사용자의 refreshToken이 존재하지 않습니다."));
@@ -163,17 +161,17 @@ public class UserService {
 
     @Transactional
     public void addProfileImage(Long userId, String profileImg) {
-        User user =  userRepository.findById(userId)
+        Member member =  userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
 
-        user.saveProfileImg(profileImg);
+        member.saveProfileImg(profileImg);
     }
 
     public UserResponseDto getUserInfoByUserId(Long userId) {
-        User user =  userRepository.findById(userId)
+        Member member =  userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
 
-        return new UserResponseDto(user);
+        return new UserResponseDto(member);
     }
 
     public void validateUsername(UsernameRequestDto usernameRequestDto) {
