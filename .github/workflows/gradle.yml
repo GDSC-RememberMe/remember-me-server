@@ -56,7 +56,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${{ github.sha }}
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:latest
         cache-from: type=gha # 캐시 적용
         cache-to: type=gha,mode=max
         
@@ -73,6 +73,6 @@ jobs:
         key: ${{ secrets.GCE_PRIVATE_KEY }}
         port: ${{ secrets.SERVER_PORT }}
         script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${{ github.sha }}
-            sudo docker tag ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:${{ github.sha }} remember-me
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:latest
+            sudo docker tag ${{ secrets.DOCKERHUB_USERNAME }}/remember-me:latest remember-me
             sudo docker-compose up -d
