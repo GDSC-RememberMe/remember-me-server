@@ -1,8 +1,8 @@
-package com.rememberme.user.controller;
+package com.rememberme.member.controller;
 
 import com.rememberme.gcs.GcsService.GcsService;
-import com.rememberme.user.dto.UserResponseDto;
-import com.rememberme.user.service.UserService;
+import com.rememberme.member.dto.MemberResponseDto;
+import com.rememberme.member.service.MemberService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -14,9 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
-public class UserController {
+public class MemberController {
 
-    private final UserService userService;
+    private final MemberService memberService;
     private final GcsService GCSService;
     
     @ApiOperation(value = "사용자 프로필 이미지 저장")
@@ -26,15 +26,15 @@ public class UserController {
             @RequestParam MultipartFile file){
         Long userId = Long.parseLong(authentication.getName());
         String fileUrl = GCSService.uploadFiles(file);
-        userService.addProfileImage(userId, fileUrl);
+        memberService.addProfileImage(userId, fileUrl);
         return fileUrl;
     }
 
     @ApiOperation(value = "사용자 정보 조회")
     @GetMapping("/info")
-    public ResponseEntity<UserResponseDto> getUserInfo(Authentication authentication) {
+    public ResponseEntity<MemberResponseDto> getUserInfo(Authentication authentication) {
         Long userId = Long.parseLong(authentication.getName());
-        UserResponseDto userResponseDto  = userService.getUserInfoByUserId(userId);
-        return ResponseEntity.ok(userResponseDto);
+        MemberResponseDto memberResponseDto = memberService.getUserInfoByUserId(userId);
+        return ResponseEntity.ok(memberResponseDto);
     }
 }

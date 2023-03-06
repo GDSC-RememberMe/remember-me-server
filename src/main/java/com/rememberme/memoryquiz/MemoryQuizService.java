@@ -4,8 +4,8 @@ import com.rememberme.family.entity.Family;
 import com.rememberme.memoryquiz.dto.MemoryQuizRequestDto;
 import com.rememberme.memoryquiz.dto.MemoryQuizResponseDto;
 import com.rememberme.memoryquiz.entity.MemoryQuiz;
-import com.rememberme.user.entity.Member;
-import com.rememberme.user.repository.UserRepository;
+import com.rememberme.member.entity.Member;
+import com.rememberme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +19,10 @@ import java.util.stream.Collectors;
 public class MemoryQuizService {
 
     private final MemoryQuizRepository memoryQuizRepository;
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
 
     public List<MemoryQuizResponseDto> getMemoryAllByUserId(Long userId) {
-        Member member = userRepository.findById(userId)
+        Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
         Long familyId = member.getFamily().getId();
 
@@ -40,7 +40,7 @@ public class MemoryQuizService {
     }
 
     public void saveMemory(Long userId, MemoryQuizRequestDto memoryQuizRequestDto) {
-        Member member = userRepository.findById(userId)
+        Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
 
         Family family = member.getFamily();

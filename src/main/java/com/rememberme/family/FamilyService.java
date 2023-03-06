@@ -2,9 +2,9 @@ package com.rememberme.family;
 
 import com.rememberme.family.dto.FamilyResponseDto;
 import com.rememberme.family.entity.Family;
-import com.rememberme.user.entity.Member;
-import com.rememberme.user.entity.enumType.Role;
-import com.rememberme.user.repository.UserRepository;
+import com.rememberme.member.entity.Member;
+import com.rememberme.member.entity.enumType.Role;
+import com.rememberme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,10 +18,10 @@ import java.util.stream.Collectors;
 public class FamilyService {
 
     private final FamilyRepository familyRepository;
-    private final UserRepository userRepository;
+    private final MemberRepository memberRepository;
 
     public List<FamilyResponseDto> searchFamilyByKeyword(String keyword) {
-        List<Member> memberList = userRepository.findByUsernameContaining(keyword);
+        List<Member> memberList = memberRepository.findByUsernameContaining(keyword);
 
         return memberList.stream()
                 .filter(user -> user.getRole().equals(Role.PATIENT))
@@ -30,7 +30,7 @@ public class FamilyService {
     }
 
     public void setFamilyOfCaregiverUser(Long userId, Long familyId) {
-        Member member = userRepository.findById(userId)
+        Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("해당 보호자 회원이 존재하지 않습니다."));
         Family family = familyRepository.findById(familyId)
                 .orElseThrow(() -> new RuntimeException("해당 환자 회원이 존재하지 않습니다."));

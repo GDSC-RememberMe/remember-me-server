@@ -1,8 +1,8 @@
 package com.rememberme.jwt;
 
 import com.rememberme.jwt.entity.EnumType.JwtStatus;
-import com.rememberme.user.dto.TokenDto;
-import com.rememberme.user.service.CustomDetailsService;
+import com.rememberme.member.dto.TokenDto;
+import com.rememberme.member.service.CustomDetailsService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;

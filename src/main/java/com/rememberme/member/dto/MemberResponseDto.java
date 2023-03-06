@@ -1,7 +1,7 @@
-package com.rememberme.user.dto;
+package com.rememberme.member.dto;
 
-import com.rememberme.user.entity.Member;
-import com.rememberme.user.entity.enumType.Gender;
+import com.rememberme.member.entity.Member;
+import com.rememberme.member.entity.enumType.Gender;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponseDto {
+public class MemberResponseDto {
 
     private String username;
 
@@ -33,7 +33,7 @@ public class UserResponseDto {
 
     private int pushCnt;
 
-    public UserResponseDto(Member member) {
+    public MemberResponseDto(Member member) {
         this.phone = member.getPhone();
         this.username = member.getUsername();
         this.nickname = member.getNickname();

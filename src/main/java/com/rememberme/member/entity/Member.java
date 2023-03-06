@@ -1,8 +1,8 @@
-package com.rememberme.user.entity;
+package com.rememberme.member.entity;
 
 import com.rememberme.family.entity.Family;
-import com.rememberme.user.entity.enumType.Gender;
-import com.rememberme.user.entity.enumType.Role;
+import com.rememberme.member.entity.enumType.Gender;
+import com.rememberme.member.entity.enumType.Role;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Length;

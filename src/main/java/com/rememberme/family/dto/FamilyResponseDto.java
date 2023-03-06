@@ -1,6 +1,6 @@
 package com.rememberme.family.dto;
 
-import com.rememberme.user.entity.Member;
+import com.rememberme.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

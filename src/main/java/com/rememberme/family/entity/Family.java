@@ -1,7 +1,7 @@
 package com.rememberme.family.entity;
 
 import com.rememberme.memoryquiz.entity.MemoryQuiz;
-import com.rememberme.user.entity.Member;
+import com.rememberme.member.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;

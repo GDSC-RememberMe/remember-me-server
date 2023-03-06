@@ -1,4 +1,4 @@
-package com.rememberme.user.dto;
+package com.rememberme.member.dto;
 
 import lombok.*;
 

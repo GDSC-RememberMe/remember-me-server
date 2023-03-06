@@ -1,6 +1,5 @@
-package com.rememberme.user.dto;
+package com.rememberme.member.dto;
 
-import com.rememberme.user.entity.enumType.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
