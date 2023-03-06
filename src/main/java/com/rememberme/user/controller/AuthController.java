@@ -17,11 +17,11 @@ public class AuthController {
 
     private final UserService userService;
 
-    @ApiOperation(value = "회원 가입")
-    @PostMapping("/join")
-    public ResponseEntity<TokenDto> join(@RequestBody JoinRequestDto joinRequestDto) throws ParseException {
-        return ResponseEntity.ok(userService.join(joinRequestDto));
-    }
+//    @ApiOperation(value = "회원 가입")
+//    @PostMapping("/join")
+//    public ResponseEntity<TokenDto> join(@RequestBody JoinRequestDto joinRequestDto) throws ParseException {
+//        return ResponseEntity.ok(userService.join(joinRequestDto));
+//    }
     
     @ApiOperation(value = "로그인")
     @PostMapping("/login")

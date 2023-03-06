@@ -11,6 +11,7 @@ import com.rememberme.user.entity.enumType.Gender;
 import com.rememberme.user.entity.enumType.Role;
 import com.rememberme.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +25,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -36,44 +38,46 @@ public class UserService {
     private final CustomDetailsService customDetailsService;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    @Transactional
-    public TokenDto join(JoinRequestDto joinRequestDto) throws ParseException {
-        String username = joinRequestDto.getUsername();
-        String password = joinRequestDto.getPassword();
-        String nickname = joinRequestDto.getNickname();
-        String phone = joinRequestDto.getPhone();
-        String role = joinRequestDto.getRole();
-        String birth = joinRequestDto.getBirth();
-        String genderStr = joinRequestDto.getGender();
-        String profileImg = joinRequestDto.getProfileImg();
-        String address = joinRequestDto.getAddress();
-        boolean isPushAgree = joinRequestDto.isPushAgree();
-        int pushCnt = joinRequestDto.getPushCnt();
-        boolean activated = joinRequestDto.isActivated();
-
-        User user = User.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
-                .nickname(nickname)
-                .phone(phone)
-                .role(Role.valueOf(role))
-                .profileImg(profileImg)
-                .birth(parseLocalDateByBirth(birth))
-                .gender(Gender.valueOf(genderStr))
-                .address(address)
-                .isPushAgree(isPushAgree)
-                .pushCnt(pushCnt)
-                .activated(activated)
-                .build();
-
-        User savedUser = userRepository.save(user);
-        // 환자일 경우, Family 객체 추가 생성
-        if (role.equals(Role.PATIENT.toString())) {
-            Family family = createFamilyByPatientUser(savedUser.getId());
-            user.saveFamily(family);
-        }
-        return createToken(username, password);
-    }
+//    @Transactional
+//    public TokenDto join(JoinRequestDto joinRequestDto) throws ParseException {
+//        String username = joinRequestDto.getUsername();
+//        String password = joinRequestDto.getPassword();
+//        String nickname = joinRequestDto.getNickname();
+//        String phone = joinRequestDto.getPhone();
+//        String role = joinRequestDto.getRole();
+//        String birth = joinRequestDto.getBirth();
+//        String genderStr = joinRequestDto.getGender();
+//        String profileImg = joinRequestDto.getProfileImg();
+//        String address = joinRequestDto.getAddress();
+//        boolean isPushAgree = joinRequestDto.isPushAgree();
+//        int pushCnt = joinRequestDto.getPushCnt();
+//        boolean activated = joinRequestDto.isActivated();
+//
+//        User user = User.builder()
+//                .username(username)
+//                .password(passwordEncoder.encode(password))
+//                .nickname(nickname)
+//                .phone(phone)
+//                .role(Role.valueOf(role))
+//                .profileImg(profileImg)
+//                .birth(parseLocalDateByBirth(birth))
+//                .gender(Gender.valueOf(genderStr))
+//                .address(address)
+//                .isPushAgree(isPushAgree)
+//                .pushCnt(pushCnt)
+//                .activated(activated)
+//                .build();
+//
+//        log.info("user : {} {}", user.getGender(), user.getRole());
+//
+//        User savedUser = userRepository.save(user);
+//        // 환자일 경우, Family 객체 추가 생성
+//        if (role.equals(Role.PATIENT.toString())) {
+//            Family family = createFamilyByPatientUser(savedUser.getId());
+//            user.saveFamily(family);
+//        }
+//        return createToken(username, password);
+//    }
 
     private LocalDate parseLocalDateByBirth (String birth) throws ParseException {
         LocalDate date = LocalDate.parse(birth, DateTimeFormatter.ISO_DATE);
