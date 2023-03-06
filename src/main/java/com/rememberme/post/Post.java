@@ -22,9 +22,11 @@ public class Post {
 
     private String contents;
 
-    private int view;
+    @Column(name = "view_cnt")
+    private int viewCnt;
 
-    private int like;
+    @Column(name = "like_cnt")
+    private int likeCnt;
 
     @Column(name = "created_at")
     private LocalDate createdAt;
