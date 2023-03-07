@@ -1,9 +1,14 @@
 package com.rememberme.post;
 
+import com.rememberme.comment.Comment;
+import com.rememberme.hashtag.HashtagPostLink;
+import com.rememberme.member.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "post")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -13,8 +18,7 @@ import java.time.LocalDate;
 @Entity
 public class Post {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
     private Long id;
 
@@ -30,4 +34,22 @@ public class Post {
 
     @Column(name = "created_at")
     private LocalDate createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post")
+    private List<HashtagPostLink> hashtagPostLinks = new ArrayList<>();
+
+    public void updateContents(String newContents) {
+        this.contents = newContents;
+    }
+
+    public void updateTitle(String newTitle) {
+        this.title = newTitle;
+    }
 }
