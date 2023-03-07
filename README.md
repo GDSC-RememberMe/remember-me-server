@@ -7,7 +7,6 @@
 4. [프로토타입 및 User Flow](#4-프로토타입-및-user-flow)
 
 ### 1. API/DB 설계
-(https://www.figma.com/file/cc5XGoWgdD4IaN3fyC1VmT/Remember-Me---User-Flow?node-id=0%3A1&t=Hozllejxl5KK1p7o-0)
 - **API 문서** : https://documenter.getpostman.com/view/17088295/2s935hPS8i
 - **DB 문서** : https://dbdiagram.io/d/63d50f69296d97641d7cb363
 
