@@ -8,10 +8,11 @@
 
 ### 1. API/DB 설계
 - **프로토타입** : https://whimsical.com/remember-me-UPnSFwbvYbT2GQKpcqKG4T
+- **User Flow** : [https://www.figma.com/file/cc5XGoWgdD4IaN3fyC1VmT/Remember-Me---User-Flow?node-id=0%3A1&t=Hozllejxl5KK1p7o-0](https://www.figma.com/file/cc5XGoWgdD4IaN3fyC1VmT/Remember-Me---User-Flow?node-id=0%3A1&t=Hozllejxl5KK1p7o-0)
 - **API 문서** : https://documenter.getpostman.com/view/17088295/2s935hPS8i
 - **DB 문서** : https://dbdiagram.io/d/63d50f69296d97641d7cb363
 
-![rmdb](https://member-images.githubusercontent.com/77563814/218291131-3994fbbc-bc6d-4780-a34d-71a0d797d77a.png)
+![rmdb](https://user-images.githubusercontent.com/77563814/218291131-3994fbbc-bc6d-4780-a34d-71a0d797d77a.png)
 
 
 ### 2. 주요 기능
@@ -31,7 +32,7 @@
 
 ### 3. CI/CD 구조
 
-![image](https://member-images.githubusercontent.com/77563814/221392126-017991a8-ee06-4595-9ebb-90e38ca5e393.png)
+![image](https://user-images.githubusercontent.com/77563814/221392126-017991a8-ee06-4595-9ebb-90e38ca5e393.png)
 
 
 [⬆위로 가기](#remember-me-server)
