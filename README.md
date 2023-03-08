@@ -29,7 +29,7 @@
   - 📝 스프링의 예외 처리 전략, @ExceptionHandler 알아보기 - [글 작성](https://sooyoungh.github.io/exception-1)
 - **게시글 조회/저장/수정 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/800819898517ab28fed37e4d6250c5d080ed3213)
 - **댓글 조회/저장/수정/삭제 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/dbf4caad6b5bd4075aba46d0693ef35c631fe2bf)
-
+- **해시태그 저장 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/44642aef6a4f7a8d941e1d937b4e7e61a441a142)
 
 ### 3. CI/CD 구조
 
@@ -41,8 +41,8 @@
 - **프로토타입** : https://whimsical.com/remember-me-UPnSFwbvYbT2GQKpcqKG4T
 - **User Flow** : https://www.figma.com/file/cc5XGoWgdD4IaN3fyC1VmT/Remember-Me---User-Flow?node-id=0%3A1&t=Hozllejxl5KK1p7o-0
 
-<img width="8778" alt="main" src="https://user-images.githubusercontent.com/77563814/223432818-3bba1be9-2043-43a0-b345-271a85205bff.png">
 
+![image](https://user-images.githubusercontent.com/77563814/223742072-c4733b23-f7ec-40cc-86ea-6566354ae7bc.png)
 
 
 [⬆위로 가기](#remember-me-server)
