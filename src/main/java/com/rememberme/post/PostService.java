@@ -24,7 +24,7 @@ public class PostService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public void createPost(Long memberId, PostSaveRequestDto postSaveRequestDto) {
+    public Long createPost(Long memberId, PostSaveRequestDto postSaveRequestDto) {
         Member member = memberRepository.getReferenceById(memberId);
 
         Post post = Post.builder()
@@ -33,7 +33,8 @@ public class PostService {
                 .contents(postSaveRequestDto.getContents())
                 .member(member)
                 .build();
-        postRepository.save(post);
+
+        return postRepository.save(post).getId();
     }
 
     @Transactional

@@ -1,7 +1,7 @@
 package com.rememberme.post;
 
 import com.rememberme.comment.Comment;
-import com.rememberme.hashtag.HashtagPostLink;
+import com.rememberme.hashtag.entity.HashtagPostLink;
 import com.rememberme.member.entity.Member;
 import lombok.*;
 

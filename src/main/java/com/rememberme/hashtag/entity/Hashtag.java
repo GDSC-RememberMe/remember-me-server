@@ -1,4 +1,4 @@
-package com.rememberme.hashtag;
+package com.rememberme.hashtag.entity;
 
 import lombok.*;
 
@@ -19,7 +19,8 @@ public class Hashtag {
     @Column(name = "hashtag_id")
     private Long id;
 
-    private String name;
+    @Column(name = "tag_name")
+    private String tagName;
 
     @OneToMany(mappedBy = "hashtag")
     private List<HashtagPostLink> hashtagPostLinks = new ArrayList<>();

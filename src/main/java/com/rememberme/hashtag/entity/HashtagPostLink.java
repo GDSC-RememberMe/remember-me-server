@@ -1,4 +1,4 @@
-package com.rememberme.hashtag;
+package com.rememberme.hashtag.entity;
 
 import com.rememberme.post.Post;
 import lombok.*;

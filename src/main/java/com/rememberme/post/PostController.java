@@ -1,5 +1,6 @@
 package com.rememberme.post;
 
+import com.rememberme.hashtag.service.HashtagService;
 import com.rememberme.post.dto.PostAllResponseDto;
 import com.rememberme.post.dto.PostOneResponseDto;
 import com.rememberme.post.dto.PostSaveRequestDto;
@@ -19,6 +20,7 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final HashtagService hashtagService;
 
     @ApiOperation(value = "게시글 저장")
     @PostMapping
@@ -26,7 +28,11 @@ public class PostController {
             Authentication authentication,
             @RequestBody PostSaveRequestDto postSaveRequestDto) {
         Long memberId = Long.parseLong(authentication.getName());
-        postService.createPost(memberId, postSaveRequestDto);
+        Long postId = postService.createPost(memberId, postSaveRequestDto);
+        String hashtagList = postSaveRequestDto.getHashtagList();
+
+        // 해시 태그 저장하기
+        hashtagService.setHashtagList(postId, hashtagList);
         return new ResponseEntity(HttpStatus.OK);
     }
 
