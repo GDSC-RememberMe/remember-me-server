@@ -13,8 +13,7 @@ import javax.persistence.*;
 @Entity
 public class HashtagPostLink {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hashtag_post_link_id")
     private Long id;
 
