@@ -1,8 +1,10 @@
 package com.rememberme.member.entity;
 
+import com.rememberme.comment.Comment;
 import com.rememberme.family.entity.Family;
 import com.rememberme.member.entity.enumType.Gender;
 import com.rememberme.member.entity.enumType.Role;
+import com.rememberme.post.Post;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.Length;
@@ -10,6 +12,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "member")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -68,6 +72,12 @@ public class Member {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "family_id")
     private Family family;
+
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<Comment> comments = new ArrayList<>();
 
     public void saveProfileImg(String profileImg){
         this.profileImg = profileImg;
