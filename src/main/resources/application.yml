@@ -4,9 +4,9 @@ spring:
     port: 8080
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://34.64.141.140:3306/rmdb?serverTimezone=Asia/Seoul
-    username: ${MYSQL_USERNAME}
-    password: ${MYSQL_PASSWORD}
+    url: jdbc:mysql://localhost:3306/rmdb?serverTimezone=Asia/Seoul
+    username: root
+    password: {로컬 MySQL root계정 비번}
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
@@ -19,6 +19,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    defer-datasource-initialization: true
   sql:
     init:
       mode: always
