@@ -7,7 +7,6 @@ import com.rememberme.jwt.entity.RefreshToken;
 import com.rememberme.jwt.repository.RefreshTokenRepository;
 import com.rememberme.member.dto.*;
 import com.rememberme.member.entity.Member;
-import com.rememberme.member.entity.enumType.Gender;
 import com.rememberme.member.entity.enumType.Role;
 import com.rememberme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Slf4j
@@ -42,34 +39,9 @@ public class MemberService {
     public TokenDto join(JoinRequestDto joinRequestDto) throws ParseException {
         String username = joinRequestDto.getUsername();
         String password = joinRequestDto.getPassword();
-        String nickname = joinRequestDto.getNickname();
-        String phone = joinRequestDto.getPhone();
         String role = joinRequestDto.getRole();
-        String birth = joinRequestDto.getBirth();
-        String genderStr = joinRequestDto.getGender();
-        String profileImg = joinRequestDto.getProfileImg();
-        String address = joinRequestDto.getAddress();
-        boolean isPushAgree = joinRequestDto.isPushAgree();
-        int pushCnt = joinRequestDto.getPushCnt();
-        boolean activated = joinRequestDto.isActivated();
 
-        Member member = Member.builder()
-                .username(username)
-                .password(passwordEncoder.encode(password))
-                .nickname(nickname)
-                .phone(phone)
-                .role(Role.valueOf(role))
-                .profileImg(profileImg)
-                .birth(parseLocalDateByBirth(birth))
-                .gender(Gender.valueOf(genderStr))
-                .address(address)
-                .isPushAgree(isPushAgree)
-                .pushCnt(pushCnt)
-                .activated(activated)
-                .build();
-
-        log.info("Member : {} {}", member.getGender(), member.getRole());
-
+        Member member = joinRequestDto.toEntity(passwordEncoder);
         Member savedMember = memberRepository.save(member);
         // 환자일 경우, Family 객체 추가 생성
         if (role.equals(Role.PATIENT.toString())) {
@@ -77,11 +49,6 @@ public class MemberService {
             member.saveFamily(family);
         }
         return createToken(username, password);
-    }
-
-    private LocalDate parseLocalDateByBirth (String birth) throws ParseException {
-        LocalDate date = LocalDate.parse(birth, DateTimeFormatter.ISO_DATE);
-        return date;
     }
 
     @Transactional

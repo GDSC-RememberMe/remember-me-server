@@ -1,12 +1,19 @@
 package com.rememberme.member.dto;
 
+import com.rememberme.member.entity.Member;
+import com.rememberme.member.entity.enumType.Gender;
+import com.rememberme.member.entity.enumType.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @AllArgsConstructor
@@ -46,4 +53,27 @@ public class JoinRequestDto {
 
     @ColumnDefault("true")
     private boolean activated;
+
+    private LocalDate parseLocalDateByBirth (String birth) throws ParseException {
+        LocalDate date = LocalDate.parse(birth, DateTimeFormatter.ISO_DATE);
+        return date;
+    }
+
+    public Member toEntity(PasswordEncoder passwordEncoder) throws ParseException {
+
+        return  Member.builder()
+                    .username(username)
+                    .password(passwordEncoder.encode(password))
+                    .nickname(nickname)
+                    .phone(phone)
+                    .role(Role.valueOf(role))
+                    .profileImg(profileImg)
+                    .birth(parseLocalDateByBirth(birth))
+                    .gender(Gender.valueOf(gender))
+                    .address(address)
+                    .isPushAgree(isPushAgree)
+                    .pushCnt(pushCnt)
+                    .activated(activated)
+                    .build();
+    }
 }
