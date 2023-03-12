@@ -1,10 +1,10 @@
 # remember-me-server
 
 #### 목차
-1. [프로토타입 및 User Flow](#4-프로토타입-및-user-flow)
-2. [API/DB 설계](#1-apidb-설계)
-3. [주요 기능](#2-주요-기능)
-4. [CI/CD 구조](#3-cicd-구조)
+1. [프로토타입 및 User Flow](#1-프로토타입-및-user-flow)
+2. [API/DB 설계](#2-apidb-설계)
+3. [주요 기능](#3-주요-기능)
+4. [CI/CD 구조](#4-cicd-구조)
 
 
 ### 1. 프로토타입 및 User Flow
