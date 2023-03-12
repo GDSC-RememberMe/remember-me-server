@@ -1,12 +1,23 @@
 # remember-me-server
 
 #### 목차
-1. [API/DB 설계](#1-apidb-설계)
-2. [주요 기능](#2-주요-기능)
-3. [CI/CD 구조](#3-cicd-구조)
-4. [프로토타입 및 User Flow](#4-프로토타입-및-user-flow)
+1. [프로토타입 및 User Flow](#4-프로토타입-및-user-flow)
+2. [API/DB 설계](#1-apidb-설계)
+3. [주요 기능](#2-주요-기능)
+4. [CI/CD 구조](#3-cicd-구조)
 
-### 1. API/DB 설계
+
+### 1. 프로토타입 및 User Flow
+- **프로토타입**
+  - **보호자용** : https://whimsical.com/remember-me-UPnSFwbvYbT2GQKpcqKG4T
+  - **환자용** : https://whimsical.com/remember-me-2SNA8nAJUnp2nxYE7xyUuT
+- **User Flow(Figma)** : https://www.figma.com/file/cc5XGoWgdD4IaN3fyC1VmT/Remember-Me---User-Flow?node-id=0%3A1&t=Hozllejxl5KK1p7o-0
+
+
+![image](https://user-images.githubusercontent.com/77563814/223742072-c4733b23-f7ec-40cc-86ea-6566354ae7bc.png)
+
+
+### 2. API/DB 설계
 - **API 문서** : https://documenter.getpostman.com/view/17088295/2s935hPS8i
 - **DB 문서** : https://dbdiagram.io/d/63d50f69296d97641d7cb363
 
@@ -14,7 +25,7 @@
 ![Remember Me](https://user-images.githubusercontent.com/77563814/223433568-bba31c1c-aef4-4349-9f58-4719de32d1d8.png)
 
 
-### 2. 주요 기능
+### 3. 주요 기능
 - **Spring Security + JWT 로그인/회원가입 구현** (02.05)
   - 초기 구현 - [PR](https://github.com/GDSC-RememberMe/remember-me-server/pull/1)
   - 토큰 재발급 로직 리팩토링 - [커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/e3e1c146671805f404e455d284b316fd42cbfd45) 
@@ -31,18 +42,13 @@
 - **댓글 조회/저장/수정/삭제 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/dbf4caad6b5bd4075aba46d0693ef35c631fe2bf)
 - **해시태그 저장 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/44642aef6a4f7a8d941e1d937b4e7e61a441a142)
 
-### 3. CI/CD 구조
+### 4. CI/CD 구조
 
 >  CI/CD는 비용문제로 잠시 중단했습니다💦
 
 ![image](https://user-images.githubusercontent.com/77563814/221392126-017991a8-ee06-4595-9ebb-90e38ca5e393.png)
 
-### 4. 프로토타입 및 User Flow
-- **프로토타입** : https://whimsical.com/remember-me-UPnSFwbvYbT2GQKpcqKG4T
-- **User Flow** : https://www.figma.com/file/cc5XGoWgdD4IaN3fyC1VmT/Remember-Me---User-Flow?node-id=0%3A1&t=Hozllejxl5KK1p7o-0
 
-
-![image](https://user-images.githubusercontent.com/77563814/223742072-c4733b23-f7ec-40cc-86ea-6566354ae7bc.png)
 
 
 [⬆위로 가기](#remember-me-server)
