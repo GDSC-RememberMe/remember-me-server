@@ -58,7 +58,7 @@ public class PostService {
     }
 
     public List<PostAllResponseDto> getPostAll() {
-        List<Post> posts = postRepository.findAll();
+        List<Post> posts = postRepository.findAllByJPQL();
         return posts.stream().map(PostAllResponseDto::new).collect(Collectors.toUnmodifiableList());
     }
 
