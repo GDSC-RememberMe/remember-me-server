@@ -37,10 +37,13 @@
     - Gradle 의존성 캐싱하여 속도 개선 - [커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/6c319ccadb8ec0c88f6067bc72a237c6836a3515)
     - 📝 Github Actions CI/CD 속도 개선하기 - [글 작성](https://sooyoungh.github.io/github-actions-faster)
 - **자체 예외 처리 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/f16b7b09dbfda6b55ac495e677dca84dcf0a36ef) (02.21)
-  - 📝 스프링의 예외 처리 전략, @ExceptionHandler 알아보기 - [글 작성](https://sooyoungh.github.io/exception-1)
+    - 📝 스프링의 예외 처리 전략, @ExceptionHandler 알아보기 - [글 작성](https://sooyoungh.github.io/exception-1)
 - **게시글 조회/저장/수정 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/800819898517ab28fed37e4d6250c5d080ed3213)
+    - 게시글 조회 시, JPA N+1 문제 해결 - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/51f02b7aa51231a4c83d1cf71c8dcfb0e67e4869)
+    - 📝 JPA N+1 문제 상황별 해결하기(fetch join, Batch Size, DTO) - [글 작성](https://sooyoungh.github.io/JPA-N+1)
 - **댓글 조회/저장/수정/삭제 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/dbf4caad6b5bd4075aba46d0693ef35c631fe2bf)
 - **해시태그 저장 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/44642aef6a4f7a8d941e1d937b4e7e61a441a142)
+
 
 ### 4. CI/CD 구조
 
