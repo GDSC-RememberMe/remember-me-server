@@ -1,7 +1,7 @@
-package com.rememberme.memoryquiz.dto;
+package com.rememberme.memory.dto;
 
 import com.rememberme.family.entity.Family;
-import com.rememberme.memoryquiz.entity.MemoryQuiz;
+import com.rememberme.memory.entity.Memory;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemoryQuizRequestDto {
+public class MemoryRequestDto {
 
     private String title;
 
@@ -23,9 +23,9 @@ public class MemoryQuizRequestDto {
 
     private String tagWhat;
 
-    public MemoryQuiz saveMemoryQuizWithFamily(Family family) {
+    public Memory saveMemoryQuizWithFamily(Family family) {
 
-        return MemoryQuiz.builder()
+        return Memory.builder()
                 .title(title)
                 .content(content)
                 .tagWho(tagWho)

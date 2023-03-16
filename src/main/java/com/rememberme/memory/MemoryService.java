@@ -1,9 +1,9 @@
-package com.rememberme.memoryquiz;
+package com.rememberme.memory;
 
 import com.rememberme.family.entity.Family;
-import com.rememberme.memoryquiz.dto.MemoryQuizRequestDto;
-import com.rememberme.memoryquiz.dto.MemoryQuizResponseDto;
-import com.rememberme.memoryquiz.entity.MemoryQuiz;
+import com.rememberme.memory.dto.MemoryRequestDto;
+import com.rememberme.memory.dto.MemoryResponseDto;
+import com.rememberme.memory.entity.Memory;
 import com.rememberme.member.entity.Member;
 import com.rememberme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,60 +16,60 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class MemoryQuizService {
+public class MemoryService {
 
-    private final MemoryQuizRepository memoryQuizRepository;
+    private final MemoryRepository memoryRepository;
     private final MemberRepository memberRepository;
 
-    public List<MemoryQuizResponseDto> getMemoryAllByUserId(Long userId) {
+    public List<MemoryResponseDto> getMemoryAllByUserId(Long userId) {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
         Long familyId = member.getFamily().getId();
 
-        List<MemoryQuiz> memoryQuizList = memoryQuizRepository.findAllByFamilyId(familyId);
-        return memoryQuizList.stream()
-                .map(MemoryQuizResponseDto::new)
+        List<Memory> memoryList = memoryRepository.findAllByFamilyId(familyId);
+        return memoryList.stream()
+                .map(MemoryResponseDto::new)
                 .collect(Collectors.toUnmodifiableList());
     }
 
-    public MemoryQuizResponseDto getMemoryQuizByMemoryQuizId(Long memoryId) {
-        MemoryQuiz memoryQuiz = memoryQuizRepository.findById(memoryId)
+    public MemoryResponseDto getMemoryQuizByMemoryQuizId(Long memoryId) {
+        Memory memory = memoryRepository.findById(memoryId)
                     .orElseThrow(() -> new NullPointerException("해당 기억이 없습니다."));
 
-        return new MemoryQuizResponseDto(memoryQuiz);
+        return new MemoryResponseDto(memory);
     }
 
-    public void saveMemory(Long userId, MemoryQuizRequestDto memoryQuizRequestDto) {
+    public void saveMemory(Long userId, MemoryRequestDto memoryRequestDto) {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
 
         Family family = member.getFamily();
-        MemoryQuiz memoryQuiz = memoryQuizRequestDto.saveMemoryQuizWithFamily(family);
-        memoryQuizRepository.save(memoryQuiz);
+        Memory memory = memoryRequestDto.saveMemoryQuizWithFamily(family);
+        memoryRepository.save(memory);
     }
 
-    public void updateMemory(Long memoryQuizId, MemoryQuizRequestDto memoryQuizRequestDto) {
-        MemoryQuiz memoryQuiz = memoryQuizRepository.findById(memoryQuizId)
+    public void updateMemory(Long memoryQuizId, MemoryRequestDto memoryRequestDto) {
+        Memory memory = memoryRepository.findById(memoryQuizId)
                 .orElseThrow(() -> new NullPointerException("해당 MemoryQuiz가 존재하지 않습니다."));
 
-        memoryQuiz.updateMemoryQuiz(memoryQuizRequestDto);
-        memoryQuizRepository.save(memoryQuiz);
+        memory.updateMemoryQuiz(memoryRequestDto);
+        memoryRepository.save(memory);
     }
 
     public void deleteMemory(Long memoryQuizId) {
-        memoryQuizRepository.deleteById(memoryQuizId);
+        memoryRepository.deleteById(memoryQuizId);
     }
 
     public void addImageFile(Long memoryQuizId, String imageUrl) {
-        MemoryQuiz memoryQuiz = memoryQuizRepository.findById(memoryQuizId)
+        Memory memory = memoryRepository.findById(memoryQuizId)
                 .orElseThrow(() -> new NullPointerException("해당 MemoryQuiz가 존재하지 않습니다."));
 
-        memoryQuiz.addImageFile(imageUrl);
+        memory.addImageFile(imageUrl);
     }
 
     public void addAudioFile(Long memoryQuizId, String audioUrl) {
-        MemoryQuiz memoryQuiz = memoryQuizRepository.findById(memoryQuizId)
+        Memory memory = memoryRepository.findById(memoryQuizId)
                 .orElseThrow(() -> new NullPointerException("해당 MemoryQuiz가 존재하지 않습니다."));
-        memoryQuiz.addAudioFile(audioUrl);
+        memory.addAudioFile(audioUrl);
     }
 }

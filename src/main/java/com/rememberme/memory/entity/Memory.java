@@ -1,7 +1,7 @@
-package com.rememberme.memoryquiz.entity;
+package com.rememberme.memory.entity;
 
 import com.rememberme.family.entity.Family;
-import com.rememberme.memoryquiz.dto.MemoryQuizRequestDto;
+import com.rememberme.memory.dto.MemoryRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @Entity
-public class MemoryQuiz {
+public class Memory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,24 +45,24 @@ public class MemoryQuiz {
     @JoinColumn(name ="family_id")
     private Family family;
 
-    public void updateMemoryQuiz(MemoryQuizRequestDto memoryQuizRequestDto) {
-        if (memoryQuizRequestDto.getTitle() != null) {
-            this.title = memoryQuizRequestDto.getTitle();
+    public void updateMemoryQuiz(MemoryRequestDto memoryRequestDto) {
+        if (memoryRequestDto.getTitle() != null) {
+            this.title = memoryRequestDto.getTitle();
         }
-        if (memoryQuizRequestDto.getContent() != null) {
-            this.content = memoryQuizRequestDto.getContent();
+        if (memoryRequestDto.getContent() != null) {
+            this.content = memoryRequestDto.getContent();
         }
-        if (memoryQuizRequestDto.getTagWho() != null) {
-            this.tagWho = memoryQuizRequestDto.getTagWho();
+        if (memoryRequestDto.getTagWho() != null) {
+            this.tagWho = memoryRequestDto.getTagWho();
         }
-        if (memoryQuizRequestDto.getTagWhen() != null) {
-            this.tagWhen = memoryQuizRequestDto.getTagWhen();
+        if (memoryRequestDto.getTagWhen() != null) {
+            this.tagWhen = memoryRequestDto.getTagWhen();
         }
-        if (memoryQuizRequestDto.getTagWhere() != null) {
-            this.tagWhere = memoryQuizRequestDto.getTagWhere();
+        if (memoryRequestDto.getTagWhere() != null) {
+            this.tagWhere = memoryRequestDto.getTagWhere();
         }
-        if (memoryQuizRequestDto.getTagWhat() != null) {
-            this.tagWhat = memoryQuizRequestDto.getTagWhat();
+        if (memoryRequestDto.getTagWhat() != null) {
+            this.tagWhat = memoryRequestDto.getTagWhat();
         }
     }
 

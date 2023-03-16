@@ -1,8 +1,8 @@
-package com.rememberme.memoryquiz;
+package com.rememberme.memory;
 
 import com.rememberme.gcs.GcsService.GcsService;
-import com.rememberme.memoryquiz.dto.MemoryQuizRequestDto;
-import com.rememberme.memoryquiz.dto.MemoryQuizResponseDto;
+import com.rememberme.memory.dto.MemoryRequestDto;
+import com.rememberme.memory.dto.MemoryResponseDto;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,34 +16,34 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class MemoryQuizController {
+public class MemoryController {
 
-    private final MemoryQuizService memoryQuizService;
+    private final MemoryService memoryService;
     private final GcsService GCSService;
 
     // 이것만 환자도 접근 가능!, 나머지는 보호자만 접근 가능
     @ApiOperation(value = "사용자의 모든 MemoryQuiz 조회")
     @GetMapping("/memory/all")
-    public ResponseEntity<List<MemoryQuizResponseDto>> getMemoryAll(Authentication authentication) {
+    public ResponseEntity<List<MemoryResponseDto>> getMemoryAll(Authentication authentication) {
         Long userId = Long.parseLong(authentication.getName());
-        List<MemoryQuizResponseDto> result = memoryQuizService.getMemoryAllByUserId(userId);
+        List<MemoryResponseDto> result = memoryService.getMemoryAllByUserId(userId);
         return ResponseEntity.ok(result);
     }
     
     @ApiOperation(value = "사용자의 개별 MemoryQuiz 상세 조회")
     @GetMapping("/memory/detail/{memoryId}")
-    public ResponseEntity<MemoryQuizResponseDto> getMemoryOne(@PathVariable Long memoryQuizId) {
-        MemoryQuizResponseDto memoryQuizResponseDto = memoryQuizService.getMemoryQuizByMemoryQuizId(memoryQuizId);
-        return ResponseEntity.ok(memoryQuizResponseDto);
+    public ResponseEntity<MemoryResponseDto> getMemoryOne(@PathVariable Long memoryQuizId) {
+        MemoryResponseDto memoryResponseDto = memoryService.getMemoryQuizByMemoryQuizId(memoryQuizId);
+        return ResponseEntity.ok(memoryResponseDto);
     }
 
     @ApiOperation(value = "MemoryQuiz 저장")
     @PostMapping("/memory")
     public ResponseEntity saveMemoryQuiz(
             Authentication authentication,
-            @RequestBody MemoryQuizRequestDto memoryQuizRequestDto ) {
+            @RequestBody MemoryRequestDto memoryRequestDto) {
         Long userId = Long.parseLong(authentication.getName());
-        memoryQuizService.saveMemory(userId, memoryQuizRequestDto);
+        memoryService.saveMemory(userId, memoryRequestDto);
         return new ResponseEntity(HttpStatus.OK);
     }
     
@@ -51,15 +51,15 @@ public class MemoryQuizController {
     @PatchMapping("/memory/{memoryQuizId}")
     public ResponseEntity updateMemoryQuiz(
             @PathVariable Long memoryQuizId,
-            @RequestBody MemoryQuizRequestDto memoryQuizRequestDto) {
-        memoryQuizService.updateMemory(memoryQuizId, memoryQuizRequestDto);
+            @RequestBody MemoryRequestDto memoryRequestDto) {
+        memoryService.updateMemory(memoryQuizId, memoryRequestDto);
         return new ResponseEntity(HttpStatus.OK);
     }
     
     @ApiOperation(value = "MemoryQuiz 삭제")
     @DeleteMapping("/memory/{memoryQuizId}")
     public ResponseEntity deleteMemory(@PathVariable Long memoryQuizId) {
-        memoryQuizService.deleteMemory(memoryQuizId);
+        memoryService.deleteMemory(memoryQuizId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -69,7 +69,7 @@ public class MemoryQuizController {
             @PathVariable Long memoryQuizId,
             @RequestParam MultipartFile file){
         String fileUrl = GCSService.uploadFiles(file);
-        memoryQuizService.addImageFile(memoryQuizId, fileUrl);
+        memoryService.addImageFile(memoryQuizId, fileUrl);
         return fileUrl;
     }
     
@@ -79,7 +79,7 @@ public class MemoryQuizController {
             @PathVariable Long memoryQuizId,
             @RequestParam MultipartFile file){
         String fileUrl = GCSService.uploadFiles(file);
-        memoryQuizService.addAudioFile(memoryQuizId, fileUrl);
+        memoryService.addAudioFile(memoryQuizId, fileUrl);
         return fileUrl;
     }
 }

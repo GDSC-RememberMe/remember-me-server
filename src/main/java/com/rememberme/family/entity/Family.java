@@ -1,6 +1,6 @@
 package com.rememberme.family.entity;
 
-import com.rememberme.memoryquiz.entity.MemoryQuiz;
+import com.rememberme.memory.entity.Memory;
 import com.rememberme.member.entity.Member;
 import lombok.*;
 
@@ -29,5 +29,5 @@ public class Family {
 
     @Builder.Default
     @OneToMany(mappedBy = "family")
-    private List<MemoryQuiz> memoryQuiz = new ArrayList<>();
+    private List<Memory> memory = new ArrayList<>();
 }
