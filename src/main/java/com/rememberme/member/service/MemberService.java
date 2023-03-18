@@ -20,7 +20,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -157,5 +159,12 @@ public class MemberService {
         if (isPresent) {
             throw new IllegalArgumentException("해당 핸드폰 번호로 가입한 회원이 이미 존재합니다.");
         }
+    }
+
+    // 모든 사용자(환자/보호자) 검색
+    public List<MemberSearchResponseDto> searchMember(String nickname) {
+        List<Member> members = memberRepository.findByNicknameContaining(nickname);
+        return members.stream().map(MemberSearchResponseDto::new)
+                .collect(Collectors.toUnmodifiableList());
     }
 }

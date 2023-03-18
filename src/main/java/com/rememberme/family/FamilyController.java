@@ -20,7 +20,7 @@ public class FamilyController {
     @ApiOperation(value = "환자 검색", notes = "이름으로 환자 검색")
     @GetMapping("/search")
     public ResponseEntity<List<FamilyResponseDto>> searchFamily(
-            @RequestParam("keyword") String keyword) {
+            @RequestParam("patient") String keyword) {
         List<FamilyResponseDto> familyResponseDtoList= familyService.searchFamilyByKeyword(keyword);
         return ResponseEntity.ok(familyResponseDtoList);
     }
