@@ -33,15 +33,28 @@ public class NostalgiaItemQuizResultService {
     public void saveNostalgiaItemResult(Long memberId, NostalgiaItemRequestDtoList nostalgiaItemRequestDtoList) {
 
         Family family = getFamilyIdByMemberId(memberId);
-        Long familyId = family.getId();
-
         List<NostalgiaItemRequestDto> inputResults = nostalgiaItemRequestDtoList.getResultList();
 
         // 1. NostalgiaItemCatalog에는 정답 맞춘 것만 저장하기
+        createNostalgiaItemCatalog(inputResults, family);
+
+        // 2. 오늘 기록 저장
+        LocalDate today = LocalDate.now();
+        Long familyId = family.getId();
+        List<NostalgiaItemQuizResult> savedResults = nostalgiaItemQuizResultRepository.findAllByFamilyIdAndCreatedAt(familyId, today);
+
+        if (savedResults.size() == 0) {
+            createNostalgiaItemQuizResult(inputResults, family);
+            return;
+        }
+        updateNostalgiaItemQuizResult(inputResults, savedResults);
+    }
+
+    private void createNostalgiaItemCatalog(List<NostalgiaItemRequestDto> inputResults, Family family) {
+        Long familyId = family.getId();
         for (NostalgiaItemRequestDto tmp : inputResults) {
             long id = tmp.getId();
             boolean result = tmp.getResult();
-            log.info("id {} res {}", id, result);
             if (!result) {
                 continue;
             }
@@ -55,30 +68,28 @@ public class NostalgiaItemQuizResultService {
                 nostalgiaItemCatalogRepository.save(newNostalgiaItemCatalog);
             }
         }
-        // 2. 오늘 기록 저장
-        LocalDate today = LocalDate.now();
-        List<NostalgiaItemQuizResult> savedResults = nostalgiaItemQuizResultRepository.findAllByFamilyIdAndCreatedAt(familyId, today);
+    }
 
-        if (savedResults.size() == 0) {
-            for (NostalgiaItemRequestDto tmp : inputResults) {
-                long nostalgiaItemId = tmp.getId();
-                boolean isCorrect = tmp.getResult();
-                NostalgiaItemQuizResult nostalgiaItemQuizResult = NostalgiaItemQuizResult.builder()
-                        .nostalgiaItemId(nostalgiaItemId)
-                        .isCorrect(isCorrect)
-                        .family(family)
-                        .build();
-                nostalgiaItemQuizResultRepository.save(nostalgiaItemQuizResult);
-            }
-        } else {
-            for (int i = 0; i <savedResults.size(); i++) {
-                long nostalgiaItemId = inputResults.get(i).getId();
-                boolean isCorrect = inputResults.get(i).getResult();
+    private void createNostalgiaItemQuizResult(List<NostalgiaItemRequestDto> inputResults, Family family) {
+        for (NostalgiaItemRequestDto inputTmp : inputResults) {
+            long nostalgiaItemId = inputTmp.getId();
+            boolean isCorrect = inputTmp.getResult();
+            NostalgiaItemQuizResult newEntity = NostalgiaItemQuizResult.builder()
+                    .family(family)
+                    .nostalgiaItemId(nostalgiaItemId)
+                    .isCorrect(isCorrect).build();
+            nostalgiaItemQuizResultRepository.save(newEntity);
+        }
+    }
 
-                NostalgiaItemQuizResult now = savedResults.get(i);
-                now.updateQuizResult(nostalgiaItemId, isCorrect);
-                nostalgiaItemQuizResultRepository.save(now);
-            }
+    private void updateNostalgiaItemQuizResult(List<NostalgiaItemRequestDto> inputResults, List<NostalgiaItemQuizResult> savedResults) {
+        for (int i = 0; i < savedResults.size(); i++) {
+            long nostalgiaItemId = inputResults.get(i).getId();
+            boolean isCorrect = inputResults.get(i).getResult();
+
+            NostalgiaItemQuizResult now = savedResults.get(i);
+            now.updateQuizResult(nostalgiaItemId, isCorrect);
+            nostalgiaItemQuizResultRepository.save(now);
         }
     }
 
@@ -97,14 +108,8 @@ public class NostalgiaItemQuizResultService {
             if (nostalgiaItem.isEmpty()) {
                 throw new RuntimeException("추억의 물건 id가 잘못되었습니다.");
             }
-
-            NostalgiaItem nostalgiaItemGet = nostalgiaItem.get();
-            NostalgiaItemQuizResultResponseDto nostalgiaItemQuizResultResponseDto = NostalgiaItemQuizResultResponseDto.builder()
-                    .nostalgiaItemId(nostalgiaItemId)
-                    .imgUrl(nostalgiaItemGet.getImgUrl())
-                    .result(tmp.isCorrect())
-                    .build();
-            dayResults.add(nostalgiaItemQuizResultResponseDto);
+            NostalgiaItemQuizResultResponseDto newDto = new NostalgiaItemQuizResultResponseDto(nostalgiaItem.get(), tmp.isCorrect());
+            dayResults.add(newDto);
 
             String date = tmp.getCreatedAt().toString();
             results.put(date, dayResults);
@@ -130,12 +135,8 @@ public class NostalgiaItemQuizResultService {
         for (NostalgiaItemCatalog tmp : nostalgiaItemCatalogs) {
             long id = tmp.getNostalgiaItemId();
             String imgUrl = nostalgiaItemRepository.findById(id).get().getImgUrl();
-
-            NostalgiaItemCatalogResponseDto newTmp = NostalgiaItemCatalogResponseDto.builder()
-                    .id(id)
-                    .imgUrl(imgUrl)
-                    .build();
-            result.add(newTmp);
+            NostalgiaItemCatalogResponseDto newDto = new NostalgiaItemCatalogResponseDto(id, imgUrl);
+            result.add(newDto);
         }
         return result;
     }
