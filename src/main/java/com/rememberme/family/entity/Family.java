@@ -1,5 +1,7 @@
 package com.rememberme.family.entity;
 
+import com.rememberme.dementiaquiz.entity.NostalgiaItemCatalog;
+import com.rememberme.dementiaquiz.entity.NostalgiaItemQuizResult;
 import com.rememberme.memory.entity.Memory;
 import com.rememberme.member.entity.Member;
 import lombok.*;
@@ -30,4 +32,11 @@ public class Family {
     @Builder.Default
     @OneToMany(mappedBy = "family")
     private List<Memory> memory = new ArrayList<>();
+
+    @OneToMany(mappedBy = "family")
+    private List<NostalgiaItemQuizResult> nostalgiaItemQuizResults = new ArrayList<>();
+
+    @OneToMany(mappedBy = "family")
+    private List<NostalgiaItemCatalog> nostalgiaItemCatalogs = new ArrayList<>();
+
 }
