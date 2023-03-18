@@ -1,4 +1,4 @@
-package com.rememberme.dementiaquiz;
+package com.rememberme.dementiaquiz.entity;
 
 import lombok.*;
 

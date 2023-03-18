@@ -7,13 +7,11 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NostalgiaItemResponseDto {
+public class NostalgiaItemQuizResultResponseDto {
 
-    private long rightNostalgiaItemId;
+    private long nostalgiaItemId;
 
     private String imgUrl;
 
-    private String rightAnswer;
-
-    private String wrongAnswer;
+    private boolean result;
 }

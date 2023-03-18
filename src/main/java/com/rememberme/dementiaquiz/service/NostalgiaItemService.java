@@ -1,6 +1,9 @@
-package com.rememberme.dementiaquiz;
+package com.rememberme.dementiaquiz.service;
 
 import com.rememberme.dementiaquiz.dto.NostalgiaItemResponseDto;
+import com.rememberme.dementiaquiz.entity.NostalgiaItem;
+import com.rememberme.dementiaquiz.repository.NostalgiaItemRepository;
+import com.rememberme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,7 @@ public class NostalgiaItemService {
             NostalgiaItem evenNostalgiaItem = nostalgiaItems.get(i * 2);
             NostalgiaItem oddNostalgiaItem = nostalgiaItems.get(i * 2 +1);
             NostalgiaItemResponseDto newItem = NostalgiaItemResponseDto.builder()
+                        .rightNostalgiaItemId(evenNostalgiaItem.getId())
                         .imgUrl(evenNostalgiaItem.getImgUrl())
                         .rightAnswer(evenNostalgiaItem.getTitle())
                         .wrongAnswer(oddNostalgiaItem.getTitle())

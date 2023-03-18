@@ -7,13 +7,9 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class NostalgiaItemResponseDto {
+public class NostalgiaItemCatalogResponseDto {
 
-    private long rightNostalgiaItemId;
+    private long id;
 
     private String imgUrl;
-
-    private String rightAnswer;
-
-    private String wrongAnswer;
 }
