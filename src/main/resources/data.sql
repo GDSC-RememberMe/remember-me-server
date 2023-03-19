@@ -37,7 +37,7 @@ INSERT INTO member (member_id, username, password, phone, nickname, role, birth,
 VALUES (5, '유저네임5', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991115', '이름5', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
 
 -- Family
--- INSERT INTO family (family_id, patient_id) VALUES (1, 1);
+INSERT INTO family (family_id, patient_id) VALUES (1, 1);
 
 -- family 관계
 UPDATE member SET family_id = 1 WHERE member_id = 1;

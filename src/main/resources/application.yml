@@ -15,7 +15,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
       ddl-auto: create
-    show-sql: true
+      show-sql: true
     properties:
       hibernate:
         format_sql: true
@@ -37,3 +37,7 @@ gcp:
     id: remember-me
   dir:
     name: chap01
+fcm:
+  key:
+    path: fcm-test.json
+    scope: https://www.googleapis.com/auth/firebase.messaging

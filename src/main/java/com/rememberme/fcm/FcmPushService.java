@@ -46,10 +46,10 @@ public class FcmPushService {
                 .setCredentials(googleCredentials)
                 .build();
 
-        if (FirebaseApp.getApps().isEmpty()) {
-            FirebaseApp.initializeApp(firebaseOptions);
-            throw new RuntimeException("Firebase 어플리케이션이 등록되지 않았습니다.");
-        }
+//        if (FirebaseApp.getApps().isEmpty()) {
+//            FirebaseApp.initializeApp(firebaseOptions);
+//            throw new RuntimeException("Firebase 어플리케이션이 등록되지 않았습니다.");
+//        }
         FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions);
         this.firebaseMessaging = FirebaseMessaging.getInstance(app);
     }
