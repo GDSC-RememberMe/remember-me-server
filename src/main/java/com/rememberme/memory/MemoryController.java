@@ -1,6 +1,8 @@
 package com.rememberme.memory;
 
+import com.rememberme.family.FamilyService;
 import com.rememberme.gcs.GcsService.GcsService;
+import com.rememberme.memory.dto.MemoryRandomResponseDto;
 import com.rememberme.memory.dto.MemoryRequestDto;
 import com.rememberme.memory.dto.MemoryResponseDto;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +21,7 @@ import java.util.List;
 public class MemoryController {
 
     private final MemoryService memoryService;
+    private final FamilyService familyService;
     private final GcsService GCSService;
 
     // 이것만 환자도 접근 가능!, 나머지는 보호자만 접근 가능
@@ -81,5 +84,14 @@ public class MemoryController {
         String fileUrl = GCSService.uploadFiles(file);
         memoryService.addAudioFile(memoryQuizId, fileUrl);
         return fileUrl;
+    }
+
+    @ApiOperation(value = "fcm 테스트용 - 랜덤 MemoryId 조회")
+    @GetMapping("/memory/random")
+    public ResponseEntity<MemoryRandomResponseDto> testFcm(Authentication authentication){
+        Long memberId = Long.parseLong(authentication.getName());
+        Long familyId = familyService.getFamilyByMemberId(memberId);
+        MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
+        return ResponseEntity.ok(memoryDto);
     }
 }
