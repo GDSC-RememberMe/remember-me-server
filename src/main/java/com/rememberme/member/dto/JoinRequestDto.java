@@ -31,6 +31,10 @@ public class JoinRequestDto {
 
     private String nickname;
 
+    private int dementiaLevel;
+
+    private String fcmToken;
+
     @NotBlank
     private String role;
 
@@ -65,6 +69,8 @@ public class JoinRequestDto {
                     .username(username)
                     .password(passwordEncoder.encode(password))
                     .nickname(nickname)
+                    .dementiaLevel(dementiaLevel)
+                    .fcmToken(fcmToken)
                     .phone(phone)
                     .role(Role.valueOf(role))
                     .profileImg(profileImg)

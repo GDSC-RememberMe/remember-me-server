@@ -4,6 +4,7 @@ import com.rememberme.member.entity.Member;
 import com.rememberme.member.entity.enumType.Gender;
 import lombok.*;
 
+import javax.persistence.Column;
 import java.time.LocalDate;
 
 @Getter
@@ -16,6 +17,10 @@ public class MemberResponseDto {
     private String username;
 
     private String nickname;
+
+    private int dementiaLevel;
+
+    private String fcmToken;
 
     private String phone;
 
@@ -37,6 +42,8 @@ public class MemberResponseDto {
         this.phone = member.getPhone();
         this.username = member.getUsername();
         this.nickname = member.getNickname();
+        this.dementiaLevel = member.getDementiaLevel();
+        this.fcmToken = member.getFcmToken();
         this.role = member.getRole().toString();
         this.profileImg = member.getProfileImg();
         this.birth = member.getBirth();

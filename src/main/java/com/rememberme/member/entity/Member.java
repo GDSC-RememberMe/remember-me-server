@@ -58,6 +58,13 @@ public class Member {
 
     private String address;
 
+    @Column(name = "dementia_level")
+    @ColumnDefault("0")
+    private int dementiaLevel;
+
+    @Column(name = "fcm_token")
+    private String fcmToken;
+
     @ColumnDefault("true")
     @Column(name = "is_push_agree")
     private boolean isPushAgree;
