@@ -1,18 +1,22 @@
 package com.rememberme.memory;
 
 import com.rememberme.family.entity.Family;
+import com.rememberme.memory.dto.MemoryRandomResponseDto;
 import com.rememberme.memory.dto.MemoryRequestDto;
 import com.rememberme.memory.dto.MemoryResponseDto;
 import com.rememberme.memory.entity.Memory;
 import com.rememberme.member.entity.Member;
 import com.rememberme.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -71,5 +75,17 @@ public class MemoryService {
         Memory memory = memoryRepository.findById(memoryQuizId)
                 .orElseThrow(() -> new NullPointerException("해당 MemoryQuiz가 존재하지 않습니다."));
         memory.addAudioFile(audioUrl);
+    }
+
+    public MemoryRandomResponseDto getRandomMemory(Long familyId) {
+        Optional<Memory> randomMemoryOpt = memoryRepository.findOneRandomMemoryIdByFamilyId(familyId);
+        if (randomMemoryOpt.isEmpty()) {
+            log.info("해당 사용자는 저장된 추억이 없습니다.");
+            return null;
+        }
+        Memory randomMemory = randomMemoryOpt.get();
+        String title = randomMemory.getTitle();
+        Long memoryId = randomMemory.getId();
+        return MemoryRandomResponseDto.builder().title(title).memoryId(memoryId).build();
     }
 }

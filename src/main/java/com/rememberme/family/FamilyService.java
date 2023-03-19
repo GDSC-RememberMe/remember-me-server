@@ -37,4 +37,14 @@ public class FamilyService {
 
         member.saveFamily(family);
     }
+
+    public Long getFamilyByMemberId(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("사용자가 존재하지 않습니다."));
+        Family family = member.getFamily();
+        if (family == null) {
+            throw new RuntimeException("사용자의 가족이 설정되지 않았습니다.");
+        }
+        return family.getId();
+    }
 }
