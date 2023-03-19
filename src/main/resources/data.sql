@@ -21,3 +21,17 @@ INSERT INTO nostalgia_item (title, img_url) VALUES ('메주', 'https://user-imag
 INSERT INTO nostalgia_item (title, img_url) VALUES ('게임기', 'https://user-images.githubusercontent.com/77563814/224518175-838008e0-b96d-4d84-a65a-8f67c2bab413.png');
 INSERT INTO nostalgia_item (title, img_url) VALUES ('티비', 'https://user-images.githubusercontent.com/77563814/224518254-88cd4f06-fd0d-48f1-b7ae-ffb569b6cec9.png');
 INSERT INTO nostalgia_item (title, img_url) VALUES ('타자기', 'https://user-images.githubusercontent.com/77563814/224518251-585c4708-6e9f-4b71-826a-a00c54bde45e.png');
+
+
+-- Member
+
+INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES ('유저네임1', '유저비번', '01099991111', '이름1', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES ('유저네임2', '유저비번', '01099991112', '이름2', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES ('유저네임3', '유저비번', '01099991113', '이름3', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES ('유저네임4', '유저비번', '01099991114', '이름4', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES ('유저네임5', '유저비번', '01099991115', '이름5', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');

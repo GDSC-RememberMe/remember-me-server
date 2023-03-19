@@ -2,6 +2,7 @@ package com.rememberme.member.controller;
 
 import com.rememberme.gcs.GcsService.GcsService;
 import com.rememberme.member.dto.MemberResponseDto;
+import com.rememberme.member.dto.MemberSearchResponseDto;
 import com.rememberme.member.service.MemberService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/user")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -20,7 +22,7 @@ public class MemberController {
     private final GcsService GCSService;
     
     @ApiOperation(value = "사용자 프로필 이미지 저장")
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/profile")
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/user/profile")
     public String addProfileImage(
             Authentication authentication,
             @RequestParam MultipartFile file){
@@ -31,10 +33,18 @@ public class MemberController {
     }
 
     @ApiOperation(value = "사용자 정보 조회")
-    @GetMapping("/info")
+    @GetMapping("/user/info")
     public ResponseEntity<MemberResponseDto> getUserInfo(Authentication authentication) {
         Long userId = Long.parseLong(authentication.getName());
         MemberResponseDto memberResponseDto = memberService.getUserInfoByUserId(userId);
         return ResponseEntity.ok(memberResponseDto);
+    }
+
+    @ApiOperation(value = "사용자 닉네임으로 검색")
+    @GetMapping("/search/all")
+    public ResponseEntity<List<MemberSearchResponseDto>> findMemberByNickname(
+            @RequestParam("nickname") String nickname) {
+        List<MemberSearchResponseDto> result = memberService.searchMember(nickname);
+        return ResponseEntity.ok(result);
     }
 }
