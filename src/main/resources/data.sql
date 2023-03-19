@@ -22,16 +22,28 @@ INSERT INTO nostalgia_item (title, img_url) VALUES ('게임기', 'https://user-i
 INSERT INTO nostalgia_item (title, img_url) VALUES ('티비', 'https://user-images.githubusercontent.com/77563814/224518254-88cd4f06-fd0d-48f1-b7ae-ffb569b6cec9.png');
 INSERT INTO nostalgia_item (title, img_url) VALUES ('타자기', 'https://user-images.githubusercontent.com/77563814/224518251-585c4708-6e9f-4b71-826a-a00c54bde45e.png');
 
-
+-- 샘플 : Member1이 환자, Member2이 보호자 (Member1이과 2는 같은 가족)
 -- Member
+-- 비번은 다 '유저비번'
+INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES (1, '유저네임1', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991111', '이름1', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES (2, '유저네임2', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991112', '이름2', 'CAREGIVER', '1950-10-01', 'MALE', '이미지 주소', '주소');
+INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES (3, '유저네임3', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991113', '이름3', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES (4, '유저네임4', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991114', '이름4', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
+VALUES (5, '유저네임5', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991115', '이름5', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
 
-INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES ('유저네임1', '유저비번', '01099991111', '이름1', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
-INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES ('유저네임2', '유저비번', '01099991112', '이름2', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
-INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES ('유저네임3', '유저비번', '01099991113', '이름3', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
-INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES ('유저네임4', '유저비번', '01099991114', '이름4', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
-INSERT INTO member (username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES ('유저네임5', '유저비번', '01099991115', '이름5', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+-- Family
+-- INSERT INTO family (family_id, patient_id) VALUES (1, 1);
+
+-- family 관계
+UPDATE member SET family_id = 1 WHERE member_id = 1;
+UPDATE member SET family_id = 1 WHERE member_id = 2;
+
+-- Memory
+INSERT INTO Memory (memory_id, family_id, title, content) VALUES (1, 1, "첫번째 추억 제목", "첫번째 추억 내용");
+INSERT INTO Memory (memory_id, family_id, title, content) VALUES (2, 1, "두번째 추억 제목", "두번째 추억 내용");
+INSERT INTO Memory (memory_id, family_id, title, content) VALUES (3, 1, "세번째 추억 제목", "세번째 추억 내용");

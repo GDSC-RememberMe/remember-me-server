@@ -6,7 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Table(name = "memory_quiz")
+@Table(name = "memory")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
@@ -16,7 +16,7 @@ public class Memory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "memory_quiz_id")
+    @Column(name = "memory_id")
     private Long id;
 
     private String title;
