@@ -44,6 +44,9 @@ UPDATE member SET family_id = 1 WHERE member_id = 1;
 UPDATE member SET family_id = 1 WHERE member_id = 2;
 
 -- Memory
-INSERT INTO Memory (memory_id, family_id, title, content) VALUES (1, 1, "첫번째 추억 제목", "첫번째 추억 내용");
-INSERT INTO Memory (memory_id, family_id, title, content) VALUES (2, 1, "두번째 추억 제목", "두번째 추억 내용");
-INSERT INTO Memory (memory_id, family_id, title, content) VALUES (3, 1, "세번째 추억 제목", "세번째 추억 내용");
+INSERT INTO Memory (memory_id, family_id, title, content, img_url)
+VALUES (1, 1, "놀이 공원", "가족끼리 놀이 공원가서 재밌게 놀았었어요.", "https://images.unsplash.com/photo-1563564120768-da63ef4f7446?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1168&q=80");
+INSERT INTO Memory (memory_id, family_id, title, content, img_url)
+VALUES (2, 1, "부산 가족 여행", "가족끼리 부산 가서 재밌었던 기억이 있어요.", "https://images.unsplash.com/photo-1633335718204-670c3d4efe2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+INSERT INTO Memory (memory_id, family_id, title, content, img_url)
+VALUES (3, 1, "가족 제주 여행", "16년도 여름 제주 여행을 가족 모두 함께 갔었어요.", "https://images.unsplash.com/photo-1579169326371-ccb4e63f7889?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");

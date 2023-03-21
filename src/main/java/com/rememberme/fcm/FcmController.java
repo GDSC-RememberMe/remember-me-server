@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +25,7 @@ public class FcmController {
             @RequestBody FcmRequestDto fcmRequestDto) throws FirebaseMessagingException {
         Long memberId = Long.parseLong(authentication.getName());
         String token = fcmRequestDto.getFcmToken(); // 토큰 받는 방식 이후에 변경
-        fcmPushService.pushAlarmTest(memberId, token);
+        fcmPushService.pushAlarmTest(1L, token);
         return new ResponseEntity(HttpStatus.OK);
     }
 
@@ -36,7 +35,7 @@ public class FcmController {
             @RequestBody FcmRequestDto fcmRequestDto) throws FirebaseMessagingException, ExecutionException, InterruptedException {
         Long memberId = Long.parseLong(authentication.getName());
         String token = fcmRequestDto.getFcmToken(); // 토큰 받는 방식 이후에 변경
-        fcmPushService.pushAlarmTestAsync(memberId, token);
+        fcmPushService.pushAlarmTestAsync(1L, token);
         return new ResponseEntity(HttpStatus.OK);
     }
 }
