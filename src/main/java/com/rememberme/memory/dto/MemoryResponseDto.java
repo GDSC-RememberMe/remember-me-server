@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemoryResponseDto {
 
+    private Long memoryId;
+
     private String title;
 
     private String content;
@@ -27,6 +29,7 @@ public class MemoryResponseDto {
     private String audioUrl;
 
     public MemoryResponseDto(Memory memory) {
+        this.memoryId = memory.getId();
         this.title = memory.getTitle();
         this.content = memory.getContent();
         this.tagWho = memory.getTagWho();
