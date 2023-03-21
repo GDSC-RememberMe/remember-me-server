@@ -54,7 +54,7 @@ public class FcmPushService {
         this.firebaseMessaging = FirebaseMessaging.getInstance(app);
     }
 
-    // 2. 메시지 전송  - 테스트용
+    // 2. 메시지 전송  - 테스트용 id만
     public void pushAlarmTest(Long familyId, String token) throws FirebaseMessagingException {
         log.info("알림 테스트 시작");
 
@@ -67,6 +67,20 @@ public class FcmPushService {
 
         Message message = createPushMessage(fcmPushDto, token);
         this.firebaseMessaging.send(message);
+    }
+
+    public void pushAlarmTestAsync(Long familyId, String token) throws FirebaseMessagingException, ExecutionException, InterruptedException {
+        log.info("알림 테스트 시작");
+
+        MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
+
+        FcmPushDto fcmPushDto = FcmPushDto.builder()
+                .memoryId(memoryDto.getMemoryId())
+                .memoryTitle(memoryDto.getTitle() + "추억이 기억나시나요?")
+                .build();
+
+        Message message = createPushMessage(fcmPushDto, token);
+        this.firebaseMessaging.sendAsync(message).get();
     }
 
     @Scheduled(cron = "0 0 09 * * ?")
