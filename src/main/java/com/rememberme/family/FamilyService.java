@@ -1,6 +1,6 @@
 package com.rememberme.family;
 
-import com.rememberme.family.dto.FamilyResponseDto;
+import com.rememberme.family.dto.FamilySearchResponseDto;
 import com.rememberme.family.entity.Family;
 import com.rememberme.member.entity.Member;
 import com.rememberme.member.entity.enumType.Role;
@@ -20,12 +20,12 @@ public class FamilyService {
     private final FamilyRepository familyRepository;
     private final MemberRepository memberRepository;
 
-    public List<FamilyResponseDto> searchFamilyByKeyword(String keyword) {
+    public List<FamilySearchResponseDto> searchFamilyByKeyword(String keyword) {
         List<Member> memberList = memberRepository.findByUsernameContaining(keyword);
 
         return memberList.stream()
                 .filter(user -> user.getRole().equals(Role.PATIENT))
-                .map(user -> new FamilyResponseDto().of(user))
+                .map(user -> new FamilySearchResponseDto().of(user))
                 .collect(Collectors.toUnmodifiableList());
     }
 
@@ -38,7 +38,7 @@ public class FamilyService {
         member.saveFamily(family);
     }
 
-    public Long getFamilyByMemberId(Long memberId) {
+    public Long getFamilyIdByMemberId(Long memberId) {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("사용자가 존재하지 않습니다."));
         Family family = member.getFamily();
@@ -46,5 +46,15 @@ public class FamilyService {
             throw new RuntimeException("사용자의 가족이 설정되지 않았습니다.");
         }
         return family.getId();
+    }
+
+    public Long getPatientIdByMemberId(Long memberId) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("사용자가 존재하지 않습니다."));
+        Family family = member.getFamily();
+        if (family == null) {
+            throw new RuntimeException("사용자의 가족이 설정되지 않았습니다.");
+        }
+        return family.getPatientId();
     }
 }

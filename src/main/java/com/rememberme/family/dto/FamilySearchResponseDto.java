@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FamilyResponseDto {
+public class FamilySearchResponseDto {
 
     private Long familyId;
 
-    private Long userId; // 환자 id
+    private Long memberId; // 환자 id
 
     private String username;
 
@@ -22,9 +22,9 @@ public class FamilyResponseDto {
 
     private String profileImg;
 
-    public FamilyResponseDto of(Member member) {
+    public FamilySearchResponseDto of(Member member) {
         this.familyId = member.getFamily().getId();
-        this.userId = member.getId();
+        this.memberId = member.getId();
         this.username = member.getUsername();
         this.nickname = member.getNickname();
         this.profileImg = member.getProfileImg();

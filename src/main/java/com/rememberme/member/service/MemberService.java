@@ -1,6 +1,7 @@
 package com.rememberme.member.service;
 
 import com.rememberme.family.FamilyRepository;
+import com.rememberme.family.dto.PatientInfoResponseDto;
 import com.rememberme.family.entity.Family;
 import com.rememberme.jwt.JwtTokenProvider;
 import com.rememberme.jwt.entity.RefreshToken;
@@ -166,5 +167,13 @@ public class MemberService {
         List<Member> members = memberRepository.findByNicknameContaining(nickname);
         return members.stream().map(MemberSearchResponseDto::new)
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    // 환자 정보 조회
+    public PatientInfoResponseDto getPatientInfoByMemberId(Long memberId) {
+        Member member =  memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
+
+        return new PatientInfoResponseDto(member);
     }
 }
