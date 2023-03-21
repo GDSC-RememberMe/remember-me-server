@@ -25,7 +25,7 @@ public class MemoryController {
     private final GcsService GCSService;
 
     // 이것만 환자도 접근 가능!, 나머지는 보호자만 접근 가능
-    @ApiOperation(value = "사용자의 모든 MemoryQuiz 조회")
+    @ApiOperation(value = "사용자의 모든 Memory 조회")
     @GetMapping("/memory/all")
     public ResponseEntity<List<MemoryResponseDto>> getMemoryAll(Authentication authentication) {
         Long userId = Long.parseLong(authentication.getName());
@@ -33,10 +33,10 @@ public class MemoryController {
         return ResponseEntity.ok(result);
     }
     
-    @ApiOperation(value = "사용자의 개별 MemoryQuiz 상세 조회")
+    @ApiOperation(value = "사용자의 개별 Memory 상세 조회")
     @GetMapping("/memory/detail/{memoryId}")
-    public ResponseEntity<MemoryResponseDto> getMemoryOne(@PathVariable Long memoryQuizId) {
-        MemoryResponseDto memoryResponseDto = memoryService.getMemoryQuizByMemoryQuizId(memoryQuizId);
+    public ResponseEntity<MemoryResponseDto> getMemoryOne(@PathVariable("memoryId") Long memoryId) {
+        MemoryResponseDto memoryResponseDto = memoryService.getMemoryQuizByMemoryQuizId(memoryId);
         return ResponseEntity.ok(memoryResponseDto);
     }
 
