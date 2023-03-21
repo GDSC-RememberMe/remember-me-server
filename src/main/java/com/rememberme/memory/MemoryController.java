@@ -40,9 +40,9 @@ public class MemoryController {
         return ResponseEntity.ok(memoryResponseDto);
     }
 
-    @ApiOperation(value = "MemoryQuiz 저장")
+    @ApiOperation(value = "Memory 저장")
     @PostMapping("/memory")
-    public ResponseEntity saveMemoryQuiz(
+    public ResponseEntity saveMemory(
             Authentication authentication,
             @RequestBody MemoryRequestDto memoryRequestDto) {
         Long userId = Long.parseLong(authentication.getName());
@@ -50,39 +50,39 @@ public class MemoryController {
         return new ResponseEntity(HttpStatus.OK);
     }
     
-    @ApiOperation(value = "MemoryQuiz 수정")
-    @PatchMapping("/memory/{memoryQuizId}")
-    public ResponseEntity updateMemoryQuiz(
-            @PathVariable Long memoryQuizId,
+    @ApiOperation(value = "Memory 수정")
+    @PatchMapping("/memory/{memoryId}")
+    public ResponseEntity updateMemory(
+            @PathVariable("memoryId") Long memoryId,
             @RequestBody MemoryRequestDto memoryRequestDto) {
-        memoryService.updateMemory(memoryQuizId, memoryRequestDto);
+        memoryService.updateMemory(memoryId, memoryRequestDto);
         return new ResponseEntity(HttpStatus.OK);
     }
     
-    @ApiOperation(value = "MemoryQuiz 삭제")
-    @DeleteMapping("/memory/{memoryQuizId}")
-    public ResponseEntity deleteMemory(@PathVariable Long memoryQuizId) {
-        memoryService.deleteMemory(memoryQuizId);
+    @ApiOperation(value = "Memory 삭제")
+    @DeleteMapping("/memory/{memoryId}")
+    public ResponseEntity deleteMemory(@PathVariable("memoryId") Long memoryId) {
+        memoryService.deleteMemory(memoryId);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @ApiOperation(value = "MemoryQuiz 이미지 업로드")
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/image/{memoryQuizId}")
+    @ApiOperation(value = "Memory 이미지 업로드")
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/image/{memoryId}")
     public String addImageFile (
-            @PathVariable Long memoryQuizId,
+            @PathVariable("memoryId") Long memoryId,
             @RequestParam MultipartFile file){
         String fileUrl = GCSService.uploadFiles(file);
-        memoryService.addImageFile(memoryQuizId, fileUrl);
+        memoryService.addImageFile(memoryId, fileUrl);
         return fileUrl;
     }
     
-    @ApiOperation(value = "MemoryQuiz 오디오 업로드")
-    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/audio/{memoryQuizId}")
+    @ApiOperation(value = "Memory 오디오 업로드")
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}, value = "/audio/{memoryId}")
     public String addAudioFile(
-            @PathVariable Long memoryQuizId,
+            @PathVariable("memoryId") Long memoryId,
             @RequestParam MultipartFile file){
         String fileUrl = GCSService.uploadFiles(file);
-        memoryService.addAudioFile(memoryQuizId, fileUrl);
+        memoryService.addAudioFile(memoryId, fileUrl);
         return fileUrl;
     }
 
