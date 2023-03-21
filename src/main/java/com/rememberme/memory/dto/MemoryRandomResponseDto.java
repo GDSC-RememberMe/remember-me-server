@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemoryRandomResponseDto {
 
-    private long memoryId;
+    private Long memoryId;
 
     private String title;
 }

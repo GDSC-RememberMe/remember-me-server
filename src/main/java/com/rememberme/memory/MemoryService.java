@@ -43,13 +43,14 @@ public class MemoryService {
         return new MemoryResponseDto(memory);
     }
 
-    public void saveMemory(Long userId, MemoryRequestDto memoryRequestDto) {
+    public Long saveMemory(Long userId, MemoryRequestDto memoryRequestDto) {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
 
         Family family = member.getFamily();
         Memory memory = memoryRequestDto.saveMemoryQuizWithFamily(family);
-        memoryRepository.save(memory);
+        Memory savedMemory = memoryRepository.save(memory);
+        return savedMemory.getId();
     }
 
     public void updateMemory(Long memoryQuizId, MemoryRequestDto memoryRequestDto) {
@@ -87,5 +88,15 @@ public class MemoryService {
         String title = randomMemory.getTitle();
         Long memoryId = randomMemory.getId();
         return MemoryRandomResponseDto.builder().title(title).memoryId(memoryId).build();
+    }
+
+    public Memory getRandomMemoryAll(Long familyId) {
+        Optional<Memory> randomMemoryOpt = memoryRepository.findOneRandomMemoryIdByFamilyId(familyId);
+        if (randomMemoryOpt.isEmpty()) {
+            log.info("해당 사용자는 저장된 추억이 없습니다.");
+            return null;
+        }
+        Memory randomMemory = randomMemoryOpt.get();
+        return randomMemoryOpt.get();
     }
 }

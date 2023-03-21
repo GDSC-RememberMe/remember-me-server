@@ -42,12 +42,12 @@ public class MemoryController {
 
     @ApiOperation(value = "Memory 저장")
     @PostMapping("/memory")
-    public ResponseEntity saveMemory(
+    public ResponseEntity<Long> saveMemory(
             Authentication authentication,
             @RequestBody MemoryRequestDto memoryRequestDto) {
         Long userId = Long.parseLong(authentication.getName());
-        memoryService.saveMemory(userId, memoryRequestDto);
-        return new ResponseEntity(HttpStatus.OK);
+        Long memoryId = memoryService.saveMemory(userId, memoryRequestDto);
+        return ResponseEntity.ok(memoryId);
     }
     
     @ApiOperation(value = "Memory 수정")
@@ -90,7 +90,7 @@ public class MemoryController {
     @GetMapping("/memory/random")
     public ResponseEntity<MemoryRandomResponseDto> testFcm(Authentication authentication){
         Long memberId = Long.parseLong(authentication.getName());
-        Long familyId = familyService.getFamilyByMemberId(memberId);
+        Long familyId = familyService.getFamilyIdByMemberId(memberId);
         MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
         return ResponseEntity.ok(memoryDto);
     }
