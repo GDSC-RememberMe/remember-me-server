@@ -43,7 +43,9 @@
     - 📝 JPA N+1 문제 상황별 해결하기(fetch join, Batch Size, DTO) - [글 작성](https://sooyoungh.github.io/JPA-N+1)
 - **댓글 조회/저장/수정/삭제 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/dbf4caad6b5bd4075aba46d0693ef35c631fe2bf)
 - **해시태그 저장 기능 구현** - [관련 커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/5/commits/44642aef6a4f7a8d941e1d937b4e7e61a441a142)
-
+- **사용자 검색 기능 구현**
+    - 📝 DB 인덱싱 알아보기(클러스터형, 보조, 커버링) - [글 작성](https://sooyoungh.github.io/Index-MySQL)
+    - 📝 인덱스 생성하여 조회 속도 개선하기 - [글 작성](https://sooyoungh.github.io/covering-index)
 
 ### 4. CI/CD 구조
 
