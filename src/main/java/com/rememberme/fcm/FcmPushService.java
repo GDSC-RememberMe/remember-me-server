@@ -14,11 +14,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.concurrent.ExecutionException;
 
 @Slf4j
 @Service
@@ -28,8 +30,8 @@ public class FcmPushService {
     @Value("${fcm.key.path}")
     private String FCM_PRIVATE_KEY;
 
-    @Value("${fcm.key.scope}")
-    private String FIREBASE_SCOPE;
+    // @Value("${fcm.key.scope}")
+    private String FIREBASE_SCOPE = "https://www.googleapis.com/auth/firebase.messaging";
 
     private FirebaseMessaging firebaseMessaging;
 
@@ -41,15 +43,13 @@ public class FcmPushService {
         GoogleCredentials googleCredentials = GoogleCredentials
                 .fromStream(new ClassPathResource(FCM_PRIVATE_KEY).getInputStream())
                 .createScoped((Arrays.asList(FIREBASE_SCOPE)));
-
         FirebaseOptions firebaseOptions = FirebaseOptions.builder()
                 .setCredentials(googleCredentials)
                 .build();
 
-//        if (FirebaseApp.getApps().isEmpty()) {
-//            FirebaseApp.initializeApp(firebaseOptions);
-//            throw new RuntimeException("Firebase 어플리케이션이 등록되지 않았습니다.");
-//        }
+        if (FirebaseApp.getApps().isEmpty()) {
+            log.info("Firebase 어플리케이션을 초기화 했습니다.");
+        }
         FirebaseApp app = FirebaseApp.initializeApp(firebaseOptions);
         this.firebaseMessaging = FirebaseMessaging.getInstance(app);
     }
@@ -67,6 +67,34 @@ public class FcmPushService {
 
         Message message = createPushMessage(fcmPushDto, token);
         this.firebaseMessaging.send(message);
+    }
+
+    @Scheduled(cron = "0 0 09 * * ?")
+    public void pushMorningAlarm(Long familyId, String token) throws FirebaseMessagingException, ExecutionException, InterruptedException {
+        log.info("오전 알림");
+        MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
+
+        FcmPushDto fcmPushDto = FcmPushDto.builder()
+                .memoryId(memoryDto.getMemoryId())
+                .memoryTitle(memoryDto.getTitle() + "추억이 기억나시나요?")
+                .build();
+
+        Message message = createPushMessage(fcmPushDto, token);
+        this.firebaseMessaging.sendAsync(message).get(); // 비동기
+    }
+
+    @Scheduled(cron = "0 0 18 * * ?")
+    public void pushAfternoonAlarm(Long familyId, String token) throws FirebaseMessagingException, ExecutionException, InterruptedException {
+        log.info("오후 알림");
+        MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
+
+        FcmPushDto fcmPushDto = FcmPushDto.builder()
+                .memoryId(memoryDto.getMemoryId())
+                .memoryTitle(memoryDto.getTitle() + "추억이 기억나시나요?")
+                .build();
+
+        Message message = createPushMessage(fcmPushDto, token);
+        this.firebaseMessaging.sendAsync(message).get(); // 비동기
     }
 
     // Message 형식으로 변경
