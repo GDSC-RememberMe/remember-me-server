@@ -52,7 +52,7 @@ dependencies {
 	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 
 	// FCM
-	implementation group: 'com.google.firebase', name: 'firebase-admin', version: '6.8.1'
+	implementation group: 'com.google.firebase', name: 'firebase-admin', version: '7.1.0'
 }
 
 tasks.named('test') {

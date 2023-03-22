@@ -53,13 +53,18 @@ public class FcmPushService {
         this.firebaseMessaging = FirebaseMessaging.getInstance(app);
     }
 
-    // 2. 테스트 - 비동기
+    // 2. 테스트 - 동기
     public void pushAlarmTest(Long familyId, String token) throws FirebaseMessagingException {
         log.info("알림 테스트 시작");
 
         MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
 
-        Notification notification = new Notification("Remember Me", memoryDto.getTitle() + PUSH_QUESTION);
+        Notification notification = Notification.builder()
+                .setTitle("Remember Me")
+                .setBody(memoryDto.getTitle() + PUSH_QUESTION)
+                .setImage("https://user-images.githubusercontent.com/77563814/226938199-87be0d00-4856-4d07-b873-44d57ecb0fe9.png")
+                .build();
+
         Message message = Message.builder()
                 .setToken(token) // 사용자 디바이스 토큰
                 .setNotification(notification)
@@ -75,7 +80,12 @@ public class FcmPushService {
 
         MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
 
-        Notification notification = new Notification("Remember Me", memoryDto.getTitle() + PUSH_QUESTION);
+        Notification notification = Notification.builder()
+                .setTitle("Remember Me")
+                .setBody(memoryDto.getTitle() + PUSH_QUESTION)
+                .setImage("https://user-images.githubusercontent.com/77563814/226938199-87be0d00-4856-4d07-b873-44d57ecb0fe9.png")
+                .build();
+
         Message message = Message.builder()
                 .setToken(token) // 사용자 디바이스 토큰
                 .setNotification(notification)
@@ -88,8 +98,12 @@ public class FcmPushService {
     @Scheduled(cron = "0 0 09 * * ?")
     public void pushMorningAlarm(Long familyId, String token) throws ExecutionException, InterruptedException {
         MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
+        Notification notification = Notification.builder()
+                .setTitle("Remember Me")
+                .setBody(memoryDto.getTitle() + PUSH_QUESTION)
+                .setImage("https://user-images.githubusercontent.com/77563814/226938199-87be0d00-4856-4d07-b873-44d57ecb0fe9.png")
+                .build();
 
-        Notification notification = new Notification("Remember Me", memoryDto.getTitle() + PUSH_QUESTION);
         Message message = Message.builder()
                 .setToken(token) // 사용자 디바이스 토큰
                 .setNotification(notification)
@@ -104,7 +118,12 @@ public class FcmPushService {
         log.info("오후 알림");
         MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
 
-        Notification notification = new Notification("Remember Me", memoryDto.getTitle() + PUSH_QUESTION);
+        Notification notification = Notification.builder()
+                .setTitle("Remember Me")
+                .setBody(memoryDto.getTitle() + PUSH_QUESTION)
+                .setImage("https://user-images.githubusercontent.com/77563814/226938199-87be0d00-4856-4d07-b873-44d57ecb0fe9.png")
+                .build();
+
         Message message = Message.builder()
                 .setToken(token) // 사용자 디바이스 토큰
                 .setNotification(notification)
