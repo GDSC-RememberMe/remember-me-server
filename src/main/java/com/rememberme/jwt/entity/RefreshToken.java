@@ -15,7 +15,7 @@ public class RefreshToken {
     @Column(name = "refresh_token_id")
     private Long id;
 
-    private String userId;
+    private String memberId;
 
     private String token;
 

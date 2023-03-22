@@ -3,13 +3,17 @@ package com.rememberme.member.controller;
 import com.rememberme.member.dto.*;
 import com.rememberme.member.service.MemberService;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.text.ParseException;
 
+@Slf4j
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -31,8 +35,12 @@ public class AuthController {
 
     @ApiOperation(value = "토큰 재발급", notes = "AccessToken 만료시, RefreshToken 검증 후 AccessToken와 RefreshToken 재발급")
     @PostMapping("/reissue")
-    public ResponseEntity<TokenDto> reissueToken(@RequestBody TokenDto tokenDto) {
-        return ResponseEntity.ok(memberService.reissue(tokenDto));
+    public ResponseEntity<TokenDto> reissueToken(
+            Authentication authentication,
+            @RequestBody TokenDto tokenDto
+    ) {
+        Long memberId = Long.parseLong(authentication.getName());
+        return ResponseEntity.ok(memberService.reissue(memberId, tokenDto));
     }
 
     @ApiOperation(value = "아이디 중복 검사")

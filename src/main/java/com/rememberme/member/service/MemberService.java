@@ -83,13 +83,13 @@ public class MemberService {
         // 새로 발급한 RefreshToken을 RefreshTokenRepository에 저장하기
         TokenDto tokenDto = jwtTokenProvider.createTokenDto(authentication);
 
-        Optional<RefreshToken> refreshToken  = refreshTokenRepository.findByUserId(authentication.getName());
+        Optional<RefreshToken> refreshToken  = refreshTokenRepository.findByMemberId(authentication.getName());
         if(refreshToken.isPresent()) {
             String updateRefreshToken = tokenDto.getRefreshToken();
             refreshToken.get().updateToken(updateRefreshToken);
         } else {
             RefreshToken newToken = RefreshToken.builder()
-                    .userId(authentication.getName())
+                    .memberId(authentication.getName())
                     .token(tokenDto.getRefreshToken())
                     .build();
             refreshTokenRepository.save(newToken);
@@ -99,17 +99,16 @@ public class MemberService {
 
     // AccessToken 만료 -> 사용자의 RefreshToken 검증 후 재발급하기
     @Transactional
-    public TokenDto reissue(TokenDto tokenRequestDto) {
+    public TokenDto reissue(Long memberId, TokenDto tokenRequestDto) {
         String accessToken = tokenRequestDto.getAccessToken();
         String resolveAccessToken = resolveToken(accessToken);
 
         Authentication authentication = jwtTokenProvider.getAuthentication(resolveAccessToken);
-
-        String userId = authentication.getName();
-        Long parseLongUserId = Long.parseLong(userId);
-        Member member = memberRepository.findById(parseLongUserId)
+        Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("해당 사용자 정보가 잘못된 토큰입니다."));
-        RefreshToken refreshToken  = refreshTokenRepository.findByUserId(userId)
+        log.info("memberId {} ", memberId);
+
+        RefreshToken refreshToken  = refreshTokenRepository.findByMemberId(memberId.toString())
                 .orElseThrow(() -> new RuntimeException("사용자의 refreshToken이 존재하지 않습니다."));
 
         // 사용자의 리프레시 토큰이랑 디비의 리프레시 토큰이랑 다를 경우
