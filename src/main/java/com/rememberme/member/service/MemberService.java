@@ -176,4 +176,12 @@ public class MemberService {
 
         return new PatientInfoResponseDto(member);
     }
+
+    public void updateFcmToken(FcmTokenRequestDto fcmTokenRequestDto, Long memberId) {
+        Member member =  memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("해당하는 회원이 없습니다."));
+        String fcmToken = fcmTokenRequestDto.getFcmToken();
+        member.updateFcmToken(fcmToken);
+        memberRepository.save(member);
+    }
 }

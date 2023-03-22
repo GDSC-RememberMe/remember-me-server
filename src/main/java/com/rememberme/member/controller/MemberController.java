@@ -1,11 +1,13 @@
 package com.rememberme.member.controller;
 
 import com.rememberme.gcs.GcsService.GcsService;
+import com.rememberme.member.dto.FcmTokenRequestDto;
 import com.rememberme.member.dto.MemberResponseDto;
 import com.rememberme.member.dto.MemberSearchResponseDto;
 import com.rememberme.member.service.MemberService;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -46,5 +48,15 @@ public class MemberController {
             @RequestParam("nickname") String nickname) {
         List<MemberSearchResponseDto> result = memberService.searchMember(nickname);
         return ResponseEntity.ok(result);
+    }
+
+    @ApiOperation(value = "fcm 토큰 업데이트")
+    @PatchMapping("/fcm")
+    public ResponseEntity updateFcmToken(
+            Authentication authentication,
+            @RequestBody FcmTokenRequestDto fcmTokenRequestDto) {
+        Long memberId = Long.parseLong(authentication.getName());
+        memberService.updateFcmToken(fcmTokenRequestDto, memberId);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

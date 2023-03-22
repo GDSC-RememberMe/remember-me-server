@@ -94,4 +94,8 @@ public class Member {
     public void saveFamily(Family family){
         this.family = family;
     }
+
+    public void updateFcmToken(String fcmToken){
+        this.fcmToken = fcmToken;
+    }
 }
