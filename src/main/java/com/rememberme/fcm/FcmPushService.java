@@ -35,6 +35,7 @@ public class FcmPushService {
 
     private final MemoryService memoryService;
     private final String PUSH_QUESTION = " 추억이 기억나시나요?";
+    private final String NOTIFICATION_IMG = "https://user-images.githubusercontent.com/77563814/226938199-87be0d00-4856-4d07-b873-44d57ecb0fe9.png";
 
     // 1. fcm 기본 설정 진행
     @PostConstruct // 의존성 주입 후, 실행
@@ -62,7 +63,7 @@ public class FcmPushService {
         Notification notification = Notification.builder()
                 .setTitle("Remember Me")
                 .setBody(memoryDto.getTitle() + PUSH_QUESTION)
-                .setImage("https://user-images.githubusercontent.com/77563814/226938199-87be0d00-4856-4d07-b873-44d57ecb0fe9.png")
+                .setImage(NOTIFICATION_IMG)
                 .build();
 
         Message message = Message.builder()
@@ -83,7 +84,7 @@ public class FcmPushService {
         Notification notification = Notification.builder()
                 .setTitle("Remember Me")
                 .setBody(memoryDto.getTitle() + PUSH_QUESTION)
-                .setImage("https://user-images.githubusercontent.com/77563814/226938199-87be0d00-4856-4d07-b873-44d57ecb0fe9.png")
+                .setImage(NOTIFICATION_IMG)
                 .build();
 
         Message message = Message.builder()
@@ -101,13 +102,13 @@ public class FcmPushService {
         Notification notification = Notification.builder()
                 .setTitle("Remember Me")
                 .setBody(memoryDto.getTitle() + PUSH_QUESTION)
-                .setImage("https://user-images.githubusercontent.com/77563814/226938199-87be0d00-4856-4d07-b873-44d57ecb0fe9.png")
+                .setImage(NOTIFICATION_IMG)
                 .build();
 
         Message message = Message.builder()
                 .setToken(token) // 사용자 디바이스 토큰
-                .setNotification(notification)
-                .putData("memoryId", memoryDto.getMemoryId().toString())
+                .setNotification(notification) // 기본 알림 템플릿
+                .putData("memoryId", memoryDto.getMemoryId().toString()) // 이외의 정보
                 .build();
 
         this.firebaseMessaging.sendAsync(message).get(); // 비동기
@@ -121,7 +122,7 @@ public class FcmPushService {
         Notification notification = Notification.builder()
                 .setTitle("Remember Me")
                 .setBody(memoryDto.getTitle() + PUSH_QUESTION)
-                .setImage("https://user-images.githubusercontent.com/77563814/226938199-87be0d00-4856-4d07-b873-44d57ecb0fe9.png")
+                .setImage(NOTIFICATION_IMG)
                 .build();
 
         Message message = Message.builder()
