@@ -2,8 +2,8 @@
 
 #### 목차
 1. [프로토타입 및 User Flow](#1-프로토타입-및-user-flow)
-2. [API/DB 설계](#2-apidb-설계)
-3. [주요 기능](#3-주요-기능)
+2. [주요 기능](#2-주요-기능)
+3. [API/DB 설계](#3-apidb-설계)
 4. [CI/CD 구조](#4-cicd-구조)
 
 
@@ -17,15 +17,8 @@
 ![image](https://user-images.githubusercontent.com/77563814/223742072-c4733b23-f7ec-40cc-86ea-6566354ae7bc.png)
 
 
-### 2. API/DB 설계
-- **API 문서** : https://documenter.getpostman.com/view/17088295/2s935hPS8i
-- **DB 문서** : https://dbdiagram.io/d/63d50f69296d97641d7cb363
 
-
-![Remember Me](https://user-images.githubusercontent.com/77563814/223433568-bba31c1c-aef4-4349-9f58-4719de32d1d8.png)
-
-
-### 3. 주요 기능
+### 2. 주요 기능
 - **Spring Security + JWT 로그인/회원가입 구현** (02.05)
   - 초기 구현 - [PR](https://github.com/GDSC-RememberMe/remember-me-server/pull/1)
   - 토큰 재발급 로직 리팩토링 - [커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/e3e1c146671805f404e455d284b316fd42cbfd45) 
@@ -46,6 +39,17 @@
 - **사용자 검색 기능 구현**
     - 📝 DB 인덱싱 알아보기(클러스터형, 보조, 커버링) - [글 작성](https://sooyoungh.github.io/Index-MySQL)
     - 📝 인덱스 생성하여 조회 속도 개선하기 - [글 작성](https://sooyoungh.github.io/covering-index)
+- **FCM 푸시 알림 기능(추억 회상 알림) 비동기 구현**
+    - 📝 FCM 푸시 알림 기능 비동기 구현 - [글 작성](https://sooyoungh.github.io/FCM)
+
+### 3. API/DB 설계
+- **API 문서** : https://documenter.getpostman.com/view/17088295/2s935hPS8i
+- **DB 문서** : https://dbdiagram.io/d/63d50f69296d97641d7cb363
+
+
+![Remember Me](https://user-images.githubusercontent.com/77563814/223433568-bba31c1c-aef4-4349-9f58-4719de32d1d8.png)
+
+
 
 ### 4. CI/CD 구조
 
