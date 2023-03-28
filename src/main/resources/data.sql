@@ -1,6 +1,7 @@
 --CREATE SCHEMA IF NOT EXISTS `rmdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin ;
 
-USE `rmdb` ;
+USE rmdb ;
+ALTER DATABASE rmdb DEFAULT CHARACTER SET UTF8;
 
 -- nostalgia_item
 INSERT INTO nostalgia_item (title, img_url) VALUES ('도시락', 'https://user-images.githubusercontent.com/77563814/224518194-b45c1103-1de2-4e7d-9267-66ae4637c53a.png');

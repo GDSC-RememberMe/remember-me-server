@@ -4,9 +4,9 @@ spring:
     port: 8080
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/rmdb?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/rmdb?createDatabaseIfNotExist=true&serverTimezone=Asia/Seoul
     username: root
-    password: {로컬 MySQL root계정 비번}
+    password:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
