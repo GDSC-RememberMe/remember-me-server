@@ -23,18 +23,6 @@ public class Memory {
 
     private String content;
 
-    @Column(name = "tag_who")
-    private String tagWho;
-
-    @Column(name = "tag_when")
-    private String tagWhen;
-
-    @Column(name = "tag_where")
-    private String tagWhere;
-
-    @Column(name = "tag_what")
-    private String tagWhat;
-
     @Column(name = "img_url")
     private String imgUrl;
 
@@ -51,18 +39,6 @@ public class Memory {
         }
         if (memoryRequestDto.getContent() != null) {
             this.content = memoryRequestDto.getContent();
-        }
-        if (memoryRequestDto.getTagWho() != null) {
-            this.tagWho = memoryRequestDto.getTagWho();
-        }
-        if (memoryRequestDto.getTagWhen() != null) {
-            this.tagWhen = memoryRequestDto.getTagWhen();
-        }
-        if (memoryRequestDto.getTagWhere() != null) {
-            this.tagWhere = memoryRequestDto.getTagWhere();
-        }
-        if (memoryRequestDto.getTagWhat() != null) {
-            this.tagWhat = memoryRequestDto.getTagWhat();
         }
     }
 

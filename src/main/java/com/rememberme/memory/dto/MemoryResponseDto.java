@@ -16,14 +16,6 @@ public class MemoryResponseDto {
 
     private String content;
 
-    private String tagWho;
-
-    private String tagWhen;
-
-    private String tagWhere;
-
-    private String tagWhat;
-
     private String imgUrl;
 
     private String audioUrl;
@@ -32,10 +24,6 @@ public class MemoryResponseDto {
         this.memoryId = memory.getId();
         this.title = memory.getTitle();
         this.content = memory.getContent();
-        this.tagWho = memory.getTagWho();
-        this.tagWhen = memory.getTagWhen();
-        this.tagWhere = memory.getTagWhere();
-        this.tagWhat = memory.getTagWhat();
         this.imgUrl = memory.getImgUrl();
         this.audioUrl = memory.getAudioUrl();
     }

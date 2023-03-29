@@ -15,23 +15,12 @@ public class MemoryRequestDto {
 
     private String content;
 
-    private String tagWho;
-
-    private String tagWhen;
-
-    private String tagWhere;
-
-    private String tagWhat;
 
     public Memory saveMemoryQuizWithFamily(Family family) {
 
         return Memory.builder()
                 .title(title)
                 .content(content)
-                .tagWho(tagWho)
-                .tagWhen(tagWhen)
-                .tagWhere(tagWhere)
-                .tagWhat(tagWhat)
                 .family(family)
                 .build();
     }
