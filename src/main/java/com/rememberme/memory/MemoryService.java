@@ -1,6 +1,7 @@
 package com.rememberme.memory;
 
 import com.rememberme.family.entity.Family;
+import com.rememberme.fastapi.KeywordResponseDto;
 import com.rememberme.memory.dto.MemoryRandomResponseDto;
 import com.rememberme.memory.dto.MemoryRequestDto;
 import com.rememberme.memory.dto.MemoryResponseDto;
@@ -25,6 +26,20 @@ public class MemoryService {
     private final MemoryRepository memoryRepository;
     private final MemberRepository memberRepository;
 
+    public List<MemoryResponseDto> getMemoryAllByCategory(Long memberId, String category) {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
+        Long familyId = member.getFamily().getId();
+
+        log.info("familyId {}", familyId);
+
+        List<Memory> memoryList = memoryRepository.findAllByCategoryAndFamilyId(familyId, category);
+        return memoryList.stream()
+                .map(MemoryResponseDto::new)
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+
     public List<MemoryResponseDto> getMemoryAllByUserId(Long userId) {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
@@ -43,13 +58,20 @@ public class MemoryService {
         return new MemoryResponseDto(memory);
     }
 
-    public Long saveMemory(Long userId, MemoryRequestDto memoryRequestDto) {
+    public Long saveMemory(Long userId, MemoryRequestDto memoryRequestDto, KeywordResponseDto keywordResponseDto) {
         Member member = memberRepository.findById(userId)
                 .orElseThrow(() -> new NullPointerException("해당하는 사용자가 없습니다."));
 
         Family family = member.getFamily();
         Memory memory = memoryRequestDto.saveMemoryQuizWithFamily(family);
         Memory savedMemory = memoryRepository.save(memory);
+
+        // Fast API
+        String category = keywordResponseDto.getCategory();
+        String keyword = keywordResponseDto.getKeyword();
+        savedMemory.updateCategory(category);
+        savedMemory.updateKeyword(keyword);
+
         return savedMemory.getId();
     }
 
@@ -57,7 +79,7 @@ public class MemoryService {
         Memory memory = memoryRepository.findById(memoryQuizId)
                 .orElseThrow(() -> new NullPointerException("해당 MemoryQuiz가 존재하지 않습니다."));
 
-        memory.updateMemoryQuiz(memoryRequestDto);
+        memory.updateMemory(memoryRequestDto);
         memoryRepository.save(memory);
     }
 

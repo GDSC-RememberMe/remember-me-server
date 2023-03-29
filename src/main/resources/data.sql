@@ -45,43 +45,43 @@ UPDATE member SET family_id = 1 WHERE member_id = 1;
 UPDATE member SET family_id = 1 WHERE member_id = 2;
 
 -- Memory
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (1, 1, "놀이 공원", "가족끼리 놀이 공원가서 재밌게 놀았었어요.", "https://images.unsplash.com/photo-1563564120768-da63ef4f7446?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1168&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (2, 1, "부산 가족 여행", "가족끼리 부산 가서 재밌었던 기억이 있어요.", "https://images.unsplash.com/photo-1633335718204-670c3d4efe2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (3, 1, "가족 제주 여행", "16년도 여름 제주 여행을 가족 모두 함께 갔었어요.", "https://images.unsplash.com/photo-1579169326371-ccb4e63f7889?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (4, 1, "어버이날", "18년도 어버이날 아주 큰 꽃을 해드렸어요. 다들 좋아하셨던게 기억이 나네요.", "https://images.unsplash.com/photo-1679502460197-549139d981e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (5, 1, "보라 유채꽃밭", "가족끼리 보라색 유채꽃밭에 갔었어요. 막내가 사진찍고 놀던 기억이 나네요.", "https://images.unsplash.com/photo-1679505528631-9f1ac50c9d72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (1, 1, "놀이 공원", "여행", "가족끼리 놀이 공원가서 재밌게 놀았었어요.", "https://images.unsplash.com/photo-1563564120768-da63ef4f7446?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1168&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (2, 1, "부산 가족 여행", "여행","가족끼리 부산 가서 재밌었던 기억이 있어요.", "https://images.unsplash.com/photo-1633335718204-670c3d4efe2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (3, 1, "가족 제주 여행", "여행","16년도 여름 제주 여행을 가족 모두 함께 갔었어요.", "https://images.unsplash.com/photo-1579169326371-ccb4e63f7889?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (4, 1, "어버이날", "여행","18년도 어버이날 아주 큰 꽃을 해드렸어요. 다들 좋아하셨던게 기억이 나네요.", "https://images.unsplash.com/photo-1679502460197-549139d981e4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (5, 1, "보라 유채꽃밭", "여행", "가족끼리 보라색 유채꽃밭에 갔었어요. 막내가 사진찍고 놀던 기억이 나네요.", "https://images.unsplash.com/photo-1679505528631-9f1ac50c9d72?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=388&q=80");
 
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (6, 1, "한강 나들이", "강아지 순이랑 다같이 한강 나들이 갔었어요. 날씨도 좋고 다들 재밌게 놀았네요.", "https://images.unsplash.com/photo-1679521184597-7481325cb060?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (7, 1, "크리스마스", "집에서 크리스마스 파티 했던 기억이 나네요.", "https://images.unsplash.com/photo-1670509684960-101c061c9c5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (8, 1, "벚꽃 축제", "지난 봄 벚꽃 축제에 갔었어요.", "https://images.unsplash.com/photo-1522383225653-ed111181a951?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (9, 1, "붕어빵", "막내가 좋아하는 붕어빵을 아버지가 사오셨어요.", "https://images.unsplash.com/photo-1614251948216-a9741023c2d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (10, 1, "궁 나들이", "가족끼리 궁 나들이를 갔었어요.", "https://images.unsplash.com/photo-1572608957299-4657d90691ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (11, 1, "북촌 한옥 마을", "가족끼리 북촌 한옥 마을에 갔었어요.", "https://images.unsplash.com/photo-1512059555341-6a121e7d4d86?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (6, 1, "한강 나들이", "여행", "강아지 순이랑 다같이 한강 나들이 갔었어요. 날씨도 좋고 다들 재밌게 놀았네요.", "https://images.unsplash.com/photo-1679521184597-7481325cb060?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (7, 1, "크리스마스", "여행", "집에서 크리스마스 파티 했던 기억이 나네요.", "https://images.unsplash.com/photo-1670509684960-101c061c9c5c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDd8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (8, 1, "벚꽃 축제", "여행", "지난 봄 벚꽃 축제에 갔었어요.", "https://images.unsplash.com/photo-1522383225653-ed111181a951?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (9, 1, "붕어빵", "여행", "막내가 좋아하는 붕어빵을 아버지가 사오셨어요.", "https://images.unsplash.com/photo-1614251948216-a9741023c2d5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (10, 1, "궁 나들이", "여행", "가족끼리 궁 나들이를 갔었어요.", "https://images.unsplash.com/photo-1572608957299-4657d90691ca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (11, 1, "북촌 한옥 마을", "여행", "가족끼리 북촌 한옥 마을에 갔었어요.", "https://images.unsplash.com/photo-1512059555341-6a121e7d4d86?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
 
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (12, 1, "제라늄 선물", "어머니가 좋아하시는 제라늄을 선물로 드렸어요.", "https://images.unsplash.com/photo-1579169558076-260989da7cc8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (13, 1, "한라산 등반", "18년도 가족끼리 제주 여행갔을 때 한라산을 등반했었어요.", "https://images.unsplash.com/photo-1565990181375-f86518c9aa8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (14, 1, "재래 시장", "가족끼리 함께 재래시장에 갔었어요. 그때 막내가 좋아하는 어묵을 많이 먹었던 기억이 있네요.", "https://images.unsplash.com/photo-1545984929-f28d9e323a00?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=503&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (15, 1, "삼청동 집", "이사 오기전 예전에 가족이 살던 삼청동 집이예요.", "https://images.unsplash.com/photo-1485186018847-dbe7e901d86b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (12, 1, "제라늄 선물", "일상", "어머니가 좋아하시는 제라늄을 선물로 드렸어요.", "https://images.unsplash.com/photo-1579169558076-260989da7cc8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (13, 1, "한라산 등반", "여행", "18년도 가족끼리 제주 여행갔을 때 한라산을 등반했었어요.", "https://images.unsplash.com/photo-1565990181375-f86518c9aa8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (14, 1, "재래 시장", "일상", "가족끼리 함께 재래시장에 갔었어요. 그때 막내가 좋아하는 어묵을 많이 먹었던 기억이 있네요.", "https://images.unsplash.com/photo-1545984929-f28d9e323a00?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=503&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (15, 1, "삼청동 집", "일상", "이사 오기전 예전에 가족이 살던 삼청동 집이예요.", "https://images.unsplash.com/photo-1485186018847-dbe7e901d86b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80");
 
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (16, 1, "바베큐 파티", "지난 여름 집에서 직접 바베큐를 해먹었어요.", "https://images.unsplash.com/photo-1508615263227-c5d58c1e5821?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (17, 1, "달고나 커피", "집에서 직접 달고나를 만들어 먹었어요.", "https://images.unsplash.com/photo-1629350120356-57bf899d2496?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80");
-INSERT INTO Memory (memory_id, family_id, title, content, img_url)
-VALUES (18, 1, "남산 타워", "남산 타워에 같이 걸어간 적이 있었어요.", "https://images.unsplash.com/photo-1538669715315-155098f0fb1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (16, 1, "바베큐 파티", "일상", "지난 여름 집에서 직접 바베큐를 해먹었어요.", "https://images.unsplash.com/photo-1508615263227-c5d58c1e5821?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (17, 1, "달고나 커피", "일상", "집에서 직접 달고나를 만들어 먹었어요.", "https://images.unsplash.com/photo-1629350120356-57bf899d2496?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80");
+INSERT INTO Memory (memory_id, family_id, title, category, content, img_url)
+VALUES (18, 1, "남산 타워", "일상", "남산 타워에 같이 걸어간 적이 있었어요.", "https://images.unsplash.com/photo-1538669715315-155098f0fb1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1025&q=80");
 

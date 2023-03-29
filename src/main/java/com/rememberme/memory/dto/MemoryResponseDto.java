@@ -16,6 +16,10 @@ public class MemoryResponseDto {
 
     private String content;
 
+    private String category;
+
+    private String keyword;
+
     private String imgUrl;
 
     private String audioUrl;
@@ -24,6 +28,8 @@ public class MemoryResponseDto {
         this.memoryId = memory.getId();
         this.title = memory.getTitle();
         this.content = memory.getContent();
+        this.category = memory.getCategory();
+        this.keyword = memory.getKeyword();
         this.imgUrl = memory.getImgUrl();
         this.audioUrl = memory.getAudioUrl();
     }

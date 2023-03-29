@@ -15,6 +15,9 @@ public interface MemoryRepository extends JpaRepository<Memory, Long> {
 
      List<Memory> findAllByFamilyId(Long familyId);
 
+     @Query(value = "SELECT * FROM memory WHERE family_id = :familyId AND category = :category", nativeQuery = true)
+     List<Memory> findAllByCategoryAndFamilyId(@Param("familyId")Long familyId, @Param("category")String category);
+
      @Query(value = "SELECT * FROM memory WHERE family_id = :familyId order by RAND() limit 1",nativeQuery = true)
      Optional<Memory> findOneRandomMemoryIdByFamilyId(@Param("familyId")Long familyId);
 }

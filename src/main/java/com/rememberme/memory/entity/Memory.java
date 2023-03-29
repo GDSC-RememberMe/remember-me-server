@@ -23,6 +23,10 @@ public class Memory {
 
     private String content;
 
+    private String category;
+
+    private String keyword;
+
     @Column(name = "img_url")
     private String imgUrl;
 
@@ -33,13 +37,21 @@ public class Memory {
     @JoinColumn(name ="family_id")
     private Family family;
 
-    public void updateMemoryQuiz(MemoryRequestDto memoryRequestDto) {
+    public void updateMemory(MemoryRequestDto memoryRequestDto) {
         if (memoryRequestDto.getTitle() != null) {
             this.title = memoryRequestDto.getTitle();
         }
         if (memoryRequestDto.getContent() != null) {
             this.content = memoryRequestDto.getContent();
         }
+    }
+
+    public void updateCategory(String category) {
+        this.category = category;
+    }
+
+    public void updateKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public void addImageFile(String imgUrl) {
