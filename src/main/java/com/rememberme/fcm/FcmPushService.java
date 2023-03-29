@@ -75,8 +75,9 @@ public class FcmPushService {
         this.firebaseMessaging.sendAsync(message).get(); // 비동기
     }
 
-    @Scheduled(cron = "0 0 09 * * ?")
+    @Scheduled(cron = "0 0 09,18 * * ?")
     public void pushMorningAlarm(Long familyId, String token) throws ExecutionException, InterruptedException {
+        log.info("FCM 푸시 알림");
         MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
         Notification notification = Notification.builder()
                 .setTitle("Remember Me")
@@ -88,26 +89,6 @@ public class FcmPushService {
                 .setToken(token) // 사용자 디바이스 토큰
                 .setNotification(notification) // 기본 알림 템플릿
                 .putData("memoryId", memoryDto.getMemoryId().toString()) // 이외의 정보
-                .build();
-
-        this.firebaseMessaging.sendAsync(message).get(); // 비동기
-    }
-
-    @Scheduled(cron = "0 0 18 * * ?")
-    public void pushAfternoonAlarm(Long familyId, String token) throws FirebaseMessagingException, ExecutionException, InterruptedException {
-        log.info("오후 알림");
-        MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
-
-        Notification notification = Notification.builder()
-                .setTitle("Remember Me")
-                .setBody(memoryDto.getTitle() + PUSH_QUESTION)
-                .setImage(NOTIFICATION_IMG)
-                .build();
-
-        Message message = Message.builder()
-                .setToken(token) // 사용자 디바이스 토큰
-                .setNotification(notification)
-                .putData("memoryId", memoryDto.getMemoryId().toString())
                 .build();
 
         this.firebaseMessaging.sendAsync(message).get(); // 비동기
