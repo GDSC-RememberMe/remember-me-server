@@ -20,20 +20,8 @@ public class FcmController {
 
     // 테스트용
     @PostMapping("/fcm-test")
-    public ResponseEntity testPush(
-            Authentication authentication,
-            @RequestBody FcmRequestDto fcmRequestDto) throws FirebaseMessagingException {
-        Long memberId = Long.parseLong(authentication.getName());
-        String token = fcmRequestDto.getFcmToken(); // 토큰 받는 방식 이후에 변경
-        fcmPushService.pushAlarmTest(1L, token);
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @PostMapping("/fcm-test/async")
     public ResponseEntity testPushAsync(
-            Authentication authentication,
             @RequestBody FcmRequestDto fcmRequestDto) throws FirebaseMessagingException, ExecutionException, InterruptedException {
-        Long memberId = Long.parseLong(authentication.getName());
         String token = fcmRequestDto.getFcmToken(); // 토큰 받는 방식 이후에 변경
         fcmPushService.pushAlarmTestAsync(1L, token);
         return new ResponseEntity(HttpStatus.OK);

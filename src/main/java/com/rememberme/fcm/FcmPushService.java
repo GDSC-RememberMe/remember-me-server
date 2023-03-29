@@ -54,27 +54,6 @@ public class FcmPushService {
         this.firebaseMessaging = FirebaseMessaging.getInstance(app);
     }
 
-    // 2. 테스트 - 동기
-    public void pushAlarmTest(Long familyId, String token) throws FirebaseMessagingException {
-        log.info("알림 테스트 시작");
-
-        MemoryRandomResponseDto memoryDto = memoryService.getRandomMemory(familyId);
-
-        Notification notification = Notification.builder()
-                .setTitle("Remember Me")
-                .setBody(memoryDto.getTitle() + PUSH_QUESTION)
-                .setImage(NOTIFICATION_IMG)
-                .build();
-
-        Message message = Message.builder()
-                .setToken(token) // 사용자 디바이스 토큰
-                .setNotification(notification)
-                .putData("memoryId", memoryDto.getMemoryId().toString() )
-                .build();
-
-        this.firebaseMessaging.send(message); // 비동기
-    }
-
     // 2. 테스트 - 비동기
     public void pushAlarmTestAsync(Long familyId, String token) throws FirebaseMessagingException, ExecutionException, InterruptedException {
         log.info("알림 테스트 시작");
