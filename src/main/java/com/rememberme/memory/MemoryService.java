@@ -77,7 +77,7 @@ public class MemoryService {
 
     public void updateMemory(Long memoryQuizId, MemoryRequestDto memoryRequestDto) {
         Memory memory = memoryRepository.findById(memoryQuizId)
-                .orElseThrow(() -> new NullPointerException("해당 MemoryQuiz가 존재하지 않습니다."));
+                .orElseThrow(() -> new NullPointerException("해당 Memory가 존재하지 않습니다."));
 
         memory.updateMemory(memoryRequestDto);
         memoryRepository.save(memory);
@@ -89,14 +89,14 @@ public class MemoryService {
 
     public void addImageFile(Long memoryQuizId, String imageUrl) {
         Memory memory = memoryRepository.findById(memoryQuizId)
-                .orElseThrow(() -> new NullPointerException("해당 MemoryQuiz가 존재하지 않습니다."));
+                .orElseThrow(() -> new NullPointerException("해당 Memory가 존재하지 않습니다."));
 
         memory.addImageFile(imageUrl);
     }
 
     public void addAudioFile(Long memoryQuizId, String audioUrl) {
         Memory memory = memoryRepository.findById(memoryQuizId)
-                .orElseThrow(() -> new NullPointerException("해당 MemoryQuiz가 존재하지 않습니다."));
+                .orElseThrow(() -> new NullPointerException("해당 Memory가 존재하지 않습니다."));
         memory.addAudioFile(audioUrl);
     }
 
