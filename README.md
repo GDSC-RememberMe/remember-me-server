@@ -13,9 +13,7 @@
   - **환자용** : https://whimsical.com/remember-me-2SNA8nAJUnp2nxYE7xyUuT
 - **User Flow(Figma)** : https://www.figma.com/file/cc5XGoWgdD4IaN3fyC1VmT/Remember-Me---User-Flow?node-id=0%3A1&t=Hozllejxl5KK1p7o-0
 
-
-![image](https://user-images.githubusercontent.com/77563814/223742072-c4733b23-f7ec-40cc-86ea-6566354ae7bc.png)
-
+![image](https://user-images.githubusercontent.com/77563814/228806067-9e966b9c-6831-4766-8874-14fd7950812e.png)
 
 
 ### 2. 주요 기능
@@ -44,11 +42,9 @@
 
 ### 3. API/DB 설계
 - **API 문서** : https://documenter.getpostman.com/view/17088295/2s935hPS8i
-- **DB 문서** : https://dbdiagram.io/d/63d50f69296d97641d7cb363
+- **DB Diagram** : 
 
-
-![Remember Me](https://user-images.githubusercontent.com/77563814/223433568-bba31c1c-aef4-4349-9f58-4719de32d1d8.png)
-
+![rmdb](https://user-images.githubusercontent.com/77563814/228805389-e2494593-7749-45c6-825d-f8b1f1bfe32f.png)
 
 
 ### 4. CI/CD 구조
