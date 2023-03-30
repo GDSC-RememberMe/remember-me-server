@@ -75,6 +75,7 @@ public class MemoryService {
         return savedMemory.getId();
     }
 
+    @Transactional
     public void updateMemory(Long memoryQuizId, MemoryRequestDto memoryRequestDto) {
         Memory memory = memoryRepository.findById(memoryQuizId)
                 .orElseThrow(() -> new NullPointerException("해당 Memory가 존재하지 않습니다."));

@@ -27,6 +27,9 @@ public class Memory {
 
     private String keyword;
 
+    @Version
+    private Long version; // 낙관적 락
+
     @Column(name = "img_url")
     private String imgUrl;
 
