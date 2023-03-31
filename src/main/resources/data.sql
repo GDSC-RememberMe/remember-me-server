@@ -25,17 +25,17 @@ INSERT INTO nostalgia_item (title, img_url) VALUES ('타자기', 'https://user-i
 
 -- 샘플 : Member1이 환자, Member2이 보호자 (Member1이과 2는 같은 가족)
 -- Member
--- 비번은 다 '유저비번'
+-- 비번은 다 'aaabbb'
 INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES (1, '유저네임1', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991111', '이름1', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+VALUES (1, 'username1', '$2a$10$bZCMzd3n6oKh2ST5CQ6l3.hxIZmhdiFViedT.jdHmJrtVJnsZ.oiu', '01099991111', 'fullname', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
 INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES (2, '유저네임2', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991112', '이름2', 'CAREGIVER', '1950-10-01', 'MALE', '이미지 주소', '주소');
+VALUES (2, 'username2', '$2a$10$bZCMzd3n6oKh2ST5CQ6l3.hxIZmhdiFViedT.jdHmJrtVJnsZ.oiu', '01099991112', 'fullname', 'CAREGIVER', '1950-10-01', 'MALE', '이미지 주소', '주소');
 INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES (3, '유저네임3', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991113', '이름3', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+VALUES (3, 'username3', '$2a$10$bZCMzd3n6oKh2ST5CQ6l3.hxIZmhdiFViedT.jdHmJrtVJnsZ.oiu', '01099991113', 'fullname', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
 INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES (4, '유저네임4', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991114', '이름4', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+VALUES (4, 'username4', '$2a$10$bZCMzd3n6oKh2ST5CQ6l3.hxIZmhdiFViedT.jdHmJrtVJnsZ.oiu', '01099991114', 'fullname', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
 INSERT INTO member (member_id, username, password, phone, nickname, role, birth, gender, profile_img, address)
-VALUES (5, '유저네임5', '$2a$10$DHVTiCR0UFOCptJNy9cVdOQuyGJbw9MRSjanBVxaR9jxAJ9RDlff2', '01099991115', '이름5', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
+VALUES (5, 'username5', '$2a$10$bZCMzd3n6oKh2ST5CQ6l3.hxIZmhdiFViedT.jdHmJrtVJnsZ.oiu', '01099991115', 'fullname', 'PATIENT', '1950-10-01', 'MALE', '이미지 주소', '주소');
 
 -- Family
 INSERT INTO family (family_id, patient_id) VALUES (1, 1);
