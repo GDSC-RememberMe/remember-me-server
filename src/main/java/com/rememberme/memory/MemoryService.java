@@ -102,24 +102,18 @@ public class MemoryService {
     }
 
     public MemoryRandomResponseDto getRandomMemory(Long familyId) {
-        Optional<Memory> randomMemoryOpt = memoryRepository.findOneRandomMemoryIdByFamilyId(familyId);
-        if (randomMemoryOpt.isEmpty()) {
-            log.info("해당 사용자는 저장된 추억이 없습니다.");
-            return null;
-        }
-        Memory randomMemory = randomMemoryOpt.get();
+        Memory randomMemory = memoryRepository.findOneRandomMemoryIdByFamilyId(familyId)
+                .orElseThrow(() -> new NullPointerException("해당 사용자는 저장된 추억이 없습니다."));
+
         String title = randomMemory.getTitle();
         Long memoryId = randomMemory.getId();
         return MemoryRandomResponseDto.builder().title(title).memoryId(memoryId).build();
     }
 
     public Memory getRandomMemoryAll(Long familyId) {
-        Optional<Memory> randomMemoryOpt = memoryRepository.findOneRandomMemoryIdByFamilyId(familyId);
-        if (randomMemoryOpt.isEmpty()) {
-            log.info("해당 사용자는 저장된 추억이 없습니다.");
-            return null;
-        }
-        Memory randomMemory = randomMemoryOpt.get();
-        return randomMemoryOpt.get();
+        Memory randomMemory = memoryRepository.findOneRandomMemoryIdByFamilyId(familyId)
+                .orElseThrow(() -> new NullPointerException("해당 사용자는 저장된 추억이 없습니다."));
+
+        return randomMemory;
     }
 }
