@@ -20,6 +20,7 @@
 - **Spring Security + JWT 로그인/회원가입 구현** (02.05)
   - 초기 구현 - [PR](https://github.com/GDSC-RememberMe/remember-me-server/pull/1)
   - 토큰 재발급 로직 리팩토링 - [커밋](https://github.com/GDSC-RememberMe/remember-me-server/commit/e3e1c146671805f404e455d284b316fd42cbfd45) 
+  - 📝 JWT 알아보기 - [글 작성](https://sooyoungh.github.io/JWT-1)
 - **MemoryQuiz(사용자 추억) 저장/삭제/조회/수정 기능 구현** - [PR](https://github.com/GDSC-RememberMe/remember-me-server/pull/2/commits/f70aef299ea5263466b00b11949d0bf3ed2dc9c6#diff-ec356e0454efce7af49c5653b013b1058632ba12f02c51600e869a628d6541f1)  (02.11)
 - **GCS 이미지/오디오 업로드 기능 구현** - [커밋](https://github.com/GDSC-RememberMe/remember-me-server/pull/2/commits/f70aef299ea5263466b00b11949d0bf3ed2dc9c6#diff-ec356e0454efce7af49c5653b013b1058632ba12f02c51600e869a628d6541f1) (02.12)
 - **User - Family 가족 관계 설정 기능 구현** - [PR](https://github.com/GDSC-RememberMe/remember-me-server/pull/4) (02.14)
